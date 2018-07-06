@@ -79,3 +79,21 @@ such as disk space usage  of the file system.
 A recursion is a tail recustion  if any recursive call that is made from one context is the very last operation in that context,with the return value of the recursive call(if any) immediately returned by the enclosing recursion.By necessity,a tail recusrion must be a linear recusrionO(since there is no way to make a second recursive call if you must immdediately return the result of the first)
 
 Any tail recursion can be reimplemented nonrecursively by enclosing the body in a loop for repetition,and replacing a recursive call with new parameters by a reassignment of the existing parameters to those values.
+
+
+```python 
+def binary_search_iterative(data,target):
+    low=0
+    high=len(data)-1
+    while low<=high:
+        mid=(low+high)//2
+        if target ==data[mid]:
+            return True
+        elif target<data[mid]:
+            high=mid-1
+        else:
+            low=mid+1
+    return False
+```
+where we made the recusive calll `binary_search(data,target,low,mid-1)` in the original version,we simply replace `high=mid-1` in our new verison and then continue to the next iteration of the loop.
+
