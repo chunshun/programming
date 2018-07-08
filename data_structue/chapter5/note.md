@@ -1,5 +1,5 @@
 1. Python's Sequence Types
-'sequence` classes:**lsit**,**tuple**,and **str** classes
+'sequence` classes:**list**,**tuple**,and **str** classes
 - referential structures
 The fact that lists and tuples are referential structures is significant to the semantics of these classes.For an example,when you compute a slice of a list, the result is a new list instance,but that new list has references to the same elements that are in the original list.
 - compact arrays
@@ -16,9 +16,15 @@ sys.getsizeof(array.array('i',list(range(10))))
 sys.getsizeof(list(range(10)))
 200
 ```
-The `array` module does not provide support for making compact arrays of user-dependent data types.Compact arrays of such structurres can be created with the lower-level support of a module names `ctypes`
+The `array` module does not provide support for making compact arrays of user-dependent data types.Compact arrays of such structures can be created with the lower-level support of a module names `ctypes`
 - dynamic array
-To add elements to the list,with no apparent limit on the overall capacity of the list.To provide this abstraction,Python relies on an algorithmic sleight of hand known as **dynamix array**
+To add elements to the list,with no apparent limit on the overall capacity of the list.To provide this abstraction,Python relies on an algorithmic sleight of hand known as **dynamic array**
 
 The first key to providing the semantics of a dynamic array is that a list instance maintains an underlying array that often has greater capacity than the current length of the list.The extra capacity makes it easy to append a new element to the list by using the next available cell of the array.
 
+
+1. Multi-dimensional array
+```python 
+
+data=[[0]*c for j in range(r)]
+```

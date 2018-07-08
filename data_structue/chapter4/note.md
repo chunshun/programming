@@ -96,4 +96,3 @@ def binary_search_iterative(data,target):
     return False
 ```
 where we made the recusive calll `binary_search(data,target,low,mid-1)` in the original version,we simply replace `high=mid-1` in our new verison and then continue to the next iteration of the loop.
-
