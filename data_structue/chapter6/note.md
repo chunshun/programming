@@ -169,3 +169,10 @@ class ArrayQueue:
 ### Double-Ended Queues 
 double-ended queue,or deque,implemented in `collections` module,supports insertion and 
 deletion at both the front and the back of the queue.
+
+
+##exercise
+- non-recursive algorithm for emulating all permutations of the numbers range(n)
+- use a stack and a queue to generate all subsets of an n-element set T non-recursively 
+- postfix notation
+- 

@@ -25,3 +25,7 @@ root.left.data="left"
 root.right=Tree()
 root.right.data="right"
 ```
+3. Application of Tree Traversals 
+- Table of Contents
+- Parenthetic Representation of a tree
+- Computing disk space
