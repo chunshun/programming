@@ -10,13 +10,13 @@ while index<len(data):
     x=data[index]
     if x in parent:
         stack.push(x) 
-    if x==')':
-        stack.pop()
-        y=stack.pop()
-        if y==')':
-            balanced=False
-            break
-    
+        if x==')':
+            stack.pop()
+            y=stack.pop()
+            if y==')':
+                balanced=False
+                break
+    print(index,x)   
     index+=1
 print(index)
 print(balanced)
