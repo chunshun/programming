@@ -343,7 +343,43 @@ int main()
    - do this for each possible position at which the string can be cut, and take the minimum over all of them
 7. Find maximum sum of sub-sequence with no adjacent elements
    Given an array of integers,find the maximum sum of sub-sequence of given array where sub-sequence contains no adjacent elements
+   The problem would be the same as the Knapsack problem.The item will be divided into selected or not selected.
+
 
 8. Increasing sub-sequence with maximum sum
    Find a sub-sequence of a given sequence sum is as high as possible and sub-sequence's elements are in sorted order,from lowest to highest.This sub-sequence is not necessarily contiguous,or unique.
-   
+   - MSIS:maximum sum increasing sub-sequence
+   - we include current item in the set(MSIS) if it is greater than the previous element in the set(MSIS) and recurs for remaining items 
+
+   - we exclude current item from the set and recurs for remaining items.
+   - Finally,we return maximum sum we get by including or excluding current item,The base case of the recursion would be when no items are left.
+
+9. collect maximum points in a matrix by satisfying given constraints
+    Given a M*N matrix where each cell can have value of 1,0,or -1,where -1 denotes a useful cell,collect maximum number of ones starting  from first cell and by visiting only safe cells(i,e 0 or 1).We are allowed to go only left or down if the row is odd else, we can only right or down from current cell
+    The formula is:
+    $if M[i][j]!=-1,path(i,j)=M[i][j]+\max(path(i,j-1),path(i+1,j)) (if i is odd)|\max(path(i,j+1),path(i+1,j))(is i is even)
+    else:
+    path(i,j)=0
+    $
+    where `path(i,j)` calculates the maximum value that can be collected starting from `cell(i,j)`
+```c++
+int matrix[5][5]={
+    {
+        1,1,-1,1,1
+    },
+    {
+        1,0,0,-1,,1
+    },
+    {
+        1,1,1,1,-1
+    },
+    {
+        -1,-1,1,1,1
+    },
+    {
+        1,1,-1,-1,1
+    }
+//the path would be 1-1-0-1-1-1-1-1-1-1-1
+
+}
+```
