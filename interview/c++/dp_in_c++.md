@@ -348,7 +348,7 @@ int main()
 
 8. Increasing sub-sequence with maximum sum
    Find a sub-sequence of a given sequence sum is as high as possible and sub-sequence's elements are in sorted order,from lowest to highest.This sub-sequence is not necessarily contiguous,or unique.
-   - MSIS:maximum sum increasing sub-sequence
+   - MSIS:maximum sum increasing sub-sequence,which is a standard variation of Longest Increasing Sub-sequence problem.
    - we include current item in the set(MSIS) if it is greater than the previous element in the set(MSIS) and recurs for remaining items 
 
    - we exclude current item from the set and recurs for remaining items.
@@ -383,3 +383,9 @@ int matrix[5][5]={
 
 }
 ```
+10. MSIS(maximum sum of increasing subs-sequence)(non-dynamic programming)
+    
+11. Longest  increasing sub-sequence using dynamic programming
+    - we include the current item in the set if it is larger than the previous element in LIS and recurs for remaining 
+    - we exclude current item from LIS and recurs for remaining 
+  

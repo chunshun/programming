@@ -1,6 +1,7 @@
 {
     "files.associations": {
         "unordered_map": "cpp",
-        "climits": "cpp"
+        "climits": "cpp",
+        "iostream": "cpp"
     }
 }
