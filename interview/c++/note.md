@@ -52,7 +52,7 @@ main(int argc, char const *argv[])
 
 }
 ```
-# `string.h`
+# `string.h`****
 1. `strlen()`
 2. `strcmp(s1,s2)`
 3. `strcmp(s1,s2)` and `strcat(s1,s2)`
