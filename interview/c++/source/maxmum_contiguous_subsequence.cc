@@ -19,11 +19,11 @@ int main(int argc, char const *argv[])
     for(int i=1;i<length; i++){
         dp[i]=max(array[i],dp[i-1]+array[i]);
     }
-    // dp[i]存放的是以index_i结尾的最大值
+    // dp[i]存放的是以index_i结尾的最大值   
     for(int i=0;i<length;i++){
         cout<<dp[i]<<"\t";
     }
-    int k=0;
+    int k=0;ls
     for(int i=0; i<length; i++){
         if (dp[i]>dp[k]) k=i;
 
