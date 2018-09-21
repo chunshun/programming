@@ -66,7 +66,7 @@ int main()
 }
 
 ```  
-1. calculate the size of the largest plus of 1's in binary matrix 
+2. calculate the size of the largest plus of 1's in binary matrix 
    用left，right，top，bottom记录可以达到的最远边界，array[i][j]=min(top[i][j],bottom[i][j],left[i][j],right[i][j])
 
 ```c++
@@ -388,4 +388,10 @@ int matrix[5][5]={
 11. Longest  increasing sub-sequence using dynamic programming
     - we include the current item in the set if it is larger than the previous element in LIS and recurs for remaining 
     - we exclude current item from LIS and recurs for remaining 
-  
+12. 最大连续子序列和
+    - $dp[i]$：以$A[i]$作为末尾的连续序列的最大和
+    - $dp[i]=\max\{A[i],dp[i-1]+A[i]\}$
+13. 最长不降子序列（LIS）
+    - $dp[i]$表示以$A[i]$结尾的最长比下降子序列长度（和最大连续子序列和问题一样，以$A[i]$结尾是强制要求
+    - $dp[i]=\max\{1,dp[j]+1\},j=1,2,\cdots,i-1 \And A[j]<A[i]$
+    - 
