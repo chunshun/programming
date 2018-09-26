@@ -1,0 +1,10 @@
+- svm kernel method
+    - kernel types
+        - linear kernel
+        - polynomial kernels
+        - rbf
+        - sigmoid kernels
+    - usage
+        - 如果特征的数量大道和样本数量差不多，选用logistic regression 或者线性核的SVM；
+        - 如果特征数量小，样本的数量正常，则选用SVM+RBF；
+        - 如果特征的数量小，而样本的数量很大，则需要手工添加一些特征转化成第一种情况。
