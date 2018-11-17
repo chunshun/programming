@@ -5,5 +5,6 @@
         "iostream": "cpp",
         "array": "cpp",
         "ostream": "cpp"
-    }
+    },
+    "python.pythonPath": "/Users/chunshun/miniconda3/bin/python"
 }

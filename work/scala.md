@@ -37,32 +37,32 @@
     val fruit: List[String] = List("apples", "oranges", "pears")
     val numbers:List[Int] =List(1,2,2,4)
     ```
-        - basic operations on List
-            - `head`
-            - `tail`
-            - `isEmpty`
+    - basic operations on List
+        - `head`
+        - `tail`
+        - `isEmpty`
+        ```scala
+        val x=List(1,23,4)
+        x.head
+        x.tail
+        x.isEmpty
+        ``` 
+        - concatenating lists
+            - `::` or `List.concat`
+        - creating uniform lists
+            - `List.fill(length)()`
+        - tabulating a function()
+            - `list.tabulate`
             ```scala
-            val x=List(1,23,4)
-            x.head
-            x.tail
-            x.isEmpty
+            val multi=List.tabulate(4,5)(_*_)
+            multi: List(List(0, 0, 0, 0, 0), List(0, 1, 2, 3, 4), 
+            List(0, 2, 4, 6, 8), List(0, 3, 6, 9, 12))
             ``` 
-            - concatenating lists
-                - `::` or `List.concat`
-            - creating uniform lists
-                - `List.fill(length)()`
-            - tabulating a function
-                - `list.tabulate`
-                ```scala
-                val multi=List.tabulate(4,5)(_*_)
-                multi: List(List(0, 0, 0, 0, 0), List(0, 1, 2, 3, 4), 
-                List(0, 2, 4, 6, 8), List(0, 3, 6, 9, 12))
-                ``` 
-            - reverse list
-            ```scala
-            x=List()
-            x.reverse
-            ``` 
+        - reverse list
+        ```scala
+        x=List()
+        x.reverse
+        ``` 
     - Set
         - create set
             ```scala
@@ -168,9 +168,9 @@
 
 
         object Hello{
-        def printMe( ) : Unit = {
+            def printMe( ) : Unit = {
             println("Hello, Scala!")
-        }
+            }
         }
         ```
         The **Unit** in scala is equal to **void**
@@ -208,3 +208,69 @@
             }
         }
         ``` 
+- if the result is boolean,then the result will be predicate
+
+
+```scala
+val x:HashMap[Int,String]=new HashMap[Int,String]()
+//equals to
+val x =new HashMap[Int,String]()
+//or
+
+val x:HashMap[Int,String ]=new HashMap()
+
+```
+
+- scala is an oo language, which means that everything is an object,including numbers or functions.It differs from Java,
+since Java distinguishes primitive types(such as boolean and int) from reference types,and does not enable one to manipulate functions as values
+```scala
+// numbers are objects
+(1).+(2)
+//functions are objects
+object Timer{
+    def once(callbcack:()=>Unit){
+        callbcak()
+    }
+    def timeFlies(){
+        while (true){
+
+        println("time flies like arrows")
+        Thread sleep(1000)
+        }
+    }
+    def main(args:Array[String]){
+        once(timeFlies)
+    }
+}
+
+```
+- anonymous functions
+```scala
+object Timer{
+    def once(callback:()=>Unit){
+        while (true){
+            callback();
+            Thread sleep(2000)
+        }
+    }
+    // def timeFlies(){
+        // println("time flies like arrow")
+    // }
+    def main(args:Array[String]){
+        once(timeFlies:()=>{
+            println("time flies like an arrow")
+        })
+    }
+}
+
+
+val inc=(x:Int)=>x+1
+```
+- classes
+```scala
+class Complex(real:Int,image:Int){
+    def real()=real
+    def img()+image
+}
+```
+- `override `
