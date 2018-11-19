@@ -23,7 +23,7 @@ general mode:
     - `ctrl E`,`ctrl Y`:line scroll up and down
 - line number
     - `ctrl G`:display current line number
-    - `n G`:move to the line number of *n*
+    - `n G`:move to the line numbe``r of *n*
     - `G`: to the end line of file
 - cursor marking
     - `m x`:mark current cursor position as *x*
@@ -33,3 +33,6 @@ general mode:
 - editing commands
     - `i`,`a`:insert text before,after cursor
     - x
+- visual mode
+    - `v`,`V`,`ctrl v`:visual mode,visual line mode,visual block mode
+    - 
