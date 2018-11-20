@@ -110,7 +110,8 @@ int main(){
 }
 ```
 - `g,f`:normal mode,cover the cursor on the file-name, enter `g,f` to open the file
-- `
+- `g,d`:go to the definition
+  
 `v`=>enter the visual mode=>select the file name to open=>`ctrl+w,ctrl+f`=>open the file 
 - `:help command`:to open the help-doc
 - `sp`,`vp`: to split the pane  vertical,to split the pane 
