@@ -131,3 +131,7 @@ copy,paste,cut
 `v`:enter thre visual mode and select the code block,`>>`: move the code block (tab to right)
 
 
+- switch between vim and others
+    - `ctrl z`:suspend the vim and `f g`:return to vim
+    - `:sh`: enter the shell and `ctrl d`: to exit the shell
+    - 
