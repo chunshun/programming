@@ -10,10 +10,7 @@
 double d=1.2;
 double d {1.2};
 
-
-
 vector<int> v {1,2,4};
-
 
 auto x=1;
 auto c=2;
