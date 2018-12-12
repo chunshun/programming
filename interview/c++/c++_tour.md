@@ -37,6 +37,10 @@ r1=r2;//r1's position  is not changed,but the refer value is changed from 10 to 
 
 - user-defined types
     - structures
+      - there is no fundamental difference between a *struct* and a *class*;a *struct* is simply a *class* with members *public* by default.
     - classes
     - unions
     - enumerations
+The new operator allocates memory from an area called the *free store*(also known as *dynamic memory* and *heap*).Objects allocated
+on the free store are independent of the scope from which they are created and live until they are destroyed using the *delete* operator.
+ 
