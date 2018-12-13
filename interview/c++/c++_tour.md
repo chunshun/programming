@@ -40,7 +40,120 @@ r1=r2;//r1's position  is not changed,but the refer value is changed from 10 to 
       - there is no fundamental difference between a *struct* and a *class*;a *struct* is simply a *class* with members *public* by default.
     - classes
     - unions
+      - *variants*: A *variant* stores a value of one of a set of alternative types.A *variant<Node \*,int>* can hold either a *Node\** or an int.
+        ```c++
+        struct Entry{
+            string name;
+            variant <Node *,int>v;
+        };
+
+        void f(Entry* pe){
+            if (holds_alternative<int>(pe->v))
+                cout<<get<int>(pe->v);
+
+        }
+        ```
     - enumerations
+      - enumerations are used to represent small sets of integer values.
+        ```c++
+        enum class Color {red, blue, yellow};
+        enum class Traffic_color {light, red, blue};
+
+        Color col=Color::red;
+        Traffic_color red =Traffic_color::red;
+
+        ```
+        also, enum plain class like C.
+        ```c++
+        enum Color {red,green,blue}
+        ```
 The new operator allocates memory from an area called the *free store*(also known as *dynamic memory* and *heap*).Objects allocated
 on the free store are independent of the scope from which they are created and live until they are destroyed using the *delete* operator.
  
+- Modularity
+  - declaration: in general,the *.h* file contains the definition,which is your data and all your method declarations. The idea is to keep signatures and members in the header file.
+  - implementation:to help the compiler ensure consistency,the `.cpp` file providing the implementation of *Vector* will also include the *.h* file providing its interface.
+  ```c++
+    Vector::Vector(int s):elem{new double[s],sz{s}}
+    {
+
+    }
+
+    double &Vector::operator[](int i)
+    {
+        return elem[i];
+    }
+
+    int Vector::size()
+    {
+        return sz;
+    }
+  ```
+  ```c++
+    // This example illustrates explicit initialization
+    // by constructor.
+    #include <iostream>
+    using namespace std;
+
+    class complex {
+    double re, im;
+    public:
+
+    // default constructor
+    complex() : re(0), im(0) { }
+
+    // copy constructor
+    complex(const complex& c) { re = c.re; im = c.im; }
+
+    // constructor with default trailing argument
+    complex( double r, double i = 0.0) { re = r; im = i; }
+
+    void display() {
+        cout << "re = "<< re << " im = " << im << endl;
+    }
+    };
+
+    int main() {
+
+    // initialize with complex(double, double)
+    complex one(1);
+
+    // initialize with a copy of one
+    // using complex::complex(const complex&)
+    complex two = one;
+
+    // construct complex(3,4)
+    // directly into three
+    complex three = complex(3,4);
+
+    // initialize with default constructor
+    complex four;
+
+    // complex(double, double) and construct
+    // directly into five
+    complex five = 5;
+
+    one.display();
+    two.display();
+    three.display();
+    four.display();
+    five.display();
+    }
+
+  ```
+  - module vs headers
+    - A module is compiled once only (rather than in each translation unit in which it is used)
+    - Two modules can be imported in either order without changing their meaning.
+    - If you import something into a module, users of your module do not implicitly gain access to(and are not bothered by) what you imported:imported is not transitive
+  - namespaces
+    - namespaces are primarily used to organize larger program components,such as libraries.They simplify the composition of a program out of separately developed parts
+- Error-handling Alternatives
+  - Throwing an exception is not the only way of reporting an error that cannot be handled locally.A function can indicate that it cannot perform its allotted task by:
+    - throwing an exception
+    - somehow returns a value indicating failure
+    - terminating the program(by invoking a function like *terminate(),exit(),abort()*)
+
+  - static_assert vs assert
+    - static_assert:exceptions report found at compile time,`static_assert(4<=sizeof(int),"integer are too small")`.The most important uses of `static_assert` comes when we make assertions about types used as parameters in generic programming.
+    - assert:error can be found at run time.Used un the debug mode
+    - 

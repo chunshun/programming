@@ -22,6 +22,31 @@ public:
 };
 
 
+
+class Vector
+{
+private:
+    /* data */
+    double* elem;
+    int sz;
+public:
+    Vector(/* args */int s);
+    double& operator[] (int i);
+    ~Vector();
+};
+
+Vector::Vector(/* args */int i)
+{
+}
+
+double &Vector::operator[](int i){
+    return elem[i];
+}
+
+Vector::~Vector()
+{
+}
+
 int main(int argc, char const *argv[])
 {
     struct R a;
