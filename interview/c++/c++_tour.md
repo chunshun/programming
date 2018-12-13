@@ -156,4 +156,20 @@ on the free store are independent of the scope from which they are created and l
   - static_assert vs assert
     - static_assert:exceptions report found at compile time,`static_assert(4<=sizeof(int),"integer are too small")`.The most important uses of `static_assert` comes when we make assertions about types used as parameters in generic programming.
     - assert:error can be found at run time.Used un the debug mode
-    - 
+  - function arguments and return values
+    - Given the importance of passing information to and from functions,it is not surprising that there are a variety of ways of doing it.Key concerns are:
+      - Is an object copied or shared?
+      - Is an object is shared,is it mutable?
+      - Is an object moved,leaving an "empty object" behind?
+    - The default behavior for both argument passing is "copy",but some copies can implicitly be optimized to moves.
+    - Argument passing
+      - By default we copy("pass-by-value") and if we want to refer to an object in the caller's environment,we use a reference("pass-by-reference").When we care about performance,we usually pass small values by-value and larger ones by-reference.Here "small" means "something that's cheap to copy".If we want to pass by reference for performance reasons but don't need to modify the argument,we pass by *const* reference in the *sum()* example.
+    - Value Return
+      - A local variable disappears when the function returns,so we should not return a pointer or reference to it.
+        ```c++
+        int &bad(){
+            int x;
+            return x
+            //bad,return a reference to the local variable x
+        }
+        ```
