@@ -173,3 +173,53 @@ on the free store are independent of the scope from which they are created and l
             //bad,return a reference to the local variable x
         }
         ```
+      - Structed binding
+  ```c++
+  struct Entry{
+    string name;
+    int value;
+  };
+  Entry read_entry(istresm &is)
+  {
+    string s;
+    int i;
+    is>> s >>i;
+    reurn {s,i};
+
+  }
+  auto e=read_entry(cin);
+  cout<<e.name<<"\t"<<e.value<<endl;
+  ```
+  Here,`{s,i}` is used to construct the `Entry` return value.To unpack the structure like that.
+  ```c++
+  auto [n, v]=read_entry(is);
+
+
+  map<string,int> m;
+  for(const auto [key,value]: m)
+  {
+    cout<<key<<"\t"<<value<<endl;
+
+  }
+
+  ```
+    - class binding
+      - there must be the same number of names defined for the binding.
+    ```c++
+    complex<double> z={1,2};
+    auto [re,im]=z+2;
+
+
+    ```
+    - distinguish between declarations(used as interfaces) and definitions(used as implementations)(separate into two files)
+    - avoid non-inline function definitions in headers;
+- classes
+  - concrete class
+    - A constructor can be invoked without an argument is called a default constructor.By defining a default constructor to eliminate the possibility of un-initialized variable of that type.
+    - A container is an object holding a collection of elements.
+    - The container,it does have a fatal flaw: it allocates elements using new but never deallocates them.C++ is not guaranteed that one is available to make unused memory available for new objects.
+  - abstract class
+  - classes in class hierarchies
+    -  
+
+
