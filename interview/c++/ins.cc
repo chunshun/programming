@@ -21,7 +21,6 @@ int main(int argc, char const *argv[])
     for(auto item:generate_vector(cin))
     {
         cout<<item<<endl;
-        
     }
     return 0;
 }

@@ -8,6 +8,7 @@ private:
 public:
     Vector(/* args */int s);
     double& operator[](int i);
+    int size();
     ~Vector();
 };
 
