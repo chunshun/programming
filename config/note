@@ -1,0 +1,2 @@
+mvn archetype:generate
+mvn -s settings.xml clean package
