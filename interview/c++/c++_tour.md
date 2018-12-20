@@ -217,10 +217,10 @@ on the free store are independent of the scope from which they are created and l
   - concrete class
     - A constructor can be invoked without an argument is called a default constructor.By defining a default constructor to eliminate the possibility of un-initialized variable of that type.
     - A container is an object holding a collection of elements.
-    - The container,it does have a fatal flaw: it allocates elements using new but never deallocates them.C++ is not guaranteed that one is available to make unused memory available for new objects.
+    - The container,it does have a fatal flaw: it allocates elements using new but never de-allocates them.C++ is not guaranteed that one is available to make unused memory available for new objects.
     - initializing containers :
       - initializer-list constructor:Initialize with a list of elements.
-      - push_back():Add a new element at the end of(at the end of) the seqence.
+      - push_back():Add a new element at the end of(at the end of) the sequence.
       ```c++
       class Vector{
         public:
@@ -231,10 +231,21 @@ on the free store are independent of the scope from which they are created and l
       - the `initializer-list` used to define the initializer-list constructor is a standard-library type known to the compiler:when we use a `{}` list,such as `{1,2,3,4}`,the compiler will create an object of type `initializer_list` to give to the program.
       ```c++
       Vector v ={1,2,5};
-      
       ``` 
   - abstract class
+    - the word `virtual` means may be redefined later in a class derived from this one.A function declared "virtual" is called a *virtual function*
+    ```c++
+    class Container {
+        public:
+            virtual double& operator[](int) = 0;     // pure virtual function
+            virtual int size() const = 0;            // const member function (§4.2.1) , the curious =0 means the function is *pure virtual* function,that is, some class derived from Container must define the function.Thus,it is not possible to redefine an object that is just a *Container*
+            virtual ~Container() {}                  // destructor (§4.2.2)
+        }
+    ``` 
+    - A `Container` can only serve as the interface to a class that implements its `operator[]()` and `size()` functions.A class with a pure virtual function is called a *abstract class*
+    - **You cannot create an object of an abstract class type; however, you can use pointers and references to abstract class types.** The abstract class doesn't have any data to initialize and doesn't have constructor.The abstract class defines only an interface and no implementation.
+    - A class that provides the interface to a variety of other classes is often called a *polymorphic type*.
+
   - classes in class hierarchies
     -  
-
 
