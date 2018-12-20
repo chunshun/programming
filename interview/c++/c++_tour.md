@@ -245,16 +245,15 @@ on the free store are independent of the scope from which they are created and l
     - A `Container` can only serve as the interface to a class that implements its `operator[]()` and `size()` functions.A class with a pure virtual function is called a *abstract class*
     - **You cannot create an object of an abstract class type; however, you can use pointers and references to abstract class types.** The abstract class doesn't have any data to initialize and doesn't have constructor.The abstract class defines only an interface and no implementation.
   ```c++
-  class Vector_container:public Container
+  class Vector_container:public Container // the `:` can be read as "it derived from" or "is subtype of".
   {
     public:
         Vector_container(int s) : v(s) { }   // Vector of s elements
-      ~Vector_container() {}
-
-      double& operator[](int i) override { return v[i]; }
-      int size() const override { return v.size(); }
+        ~Vector_container() {}
+        double& operator[](int i) override { return v[i]; }
+        int size() const override { return v.size(); }
     private:
-       Vector v;
+        Vector v;
     }
   ``` 
     - A class that provides the interface to a variety of other classes is often called a *polymorphic type*.
