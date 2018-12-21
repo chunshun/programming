@@ -16,7 +16,7 @@ public:
 class X
 {
     public:
-        X(sometype);
+        X();
         // ordinary constructor 
         X(const X&);
         //copy constructor
