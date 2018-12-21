@@ -18,9 +18,10 @@ class X
     public:
         X();
         // ordinary constructor 
-        X(const X&);
+        X(const X&)=default;
         //copy constructor
         X(X&&);
+
         //move constructor
         X& operator=(const X&);
         //copy assignment
@@ -52,6 +53,11 @@ int main(int argc, char const *argv[])
     {
         cout<<item<<endl;
     }
+    int x {1};
+
+    int y {2};
+    swap(x,y);
+    cout<<"x"<<x<<"\t"<<"y:"<<y<<endl;
     // throw out_of_range("list oute of range");
     return 0;
 }
