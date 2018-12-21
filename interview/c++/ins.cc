@@ -57,7 +57,7 @@ int main(int argc, char const *argv[])
 
     int y {2};
     swap(x,y);
-    cout<<"x"<<x<<"\t"<<"y:"<<y<<endl;
+    cout<<"x:"<<x<<"\t"<<"y:"<<y<<endl;
     // throw out_of_range("list oute of range");
     return 0;
 }

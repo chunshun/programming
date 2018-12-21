@@ -342,4 +342,15 @@ on the free store are independent of the scope from which they are created and l
     };
     ```
     move constructor:A move constructor enables the resources owned by an right-value object to be moved into an left-value without copying.
-    
+  - container operations
+  ```c++
+  for(auto p=c.begin();p!=c.end();++p)
+  {
+    *p=0;
+  }
+    - the standard library `unsorted_map<K,V>` is a hash table with `K` as the key type and `V` as the value type.
+  ```
+- Templates
+  A template is a class or a function that we parameterize with a set of type or values.We use template to represent ideas that are best understood as something general from which we can generate specific types and functions by specifying arguments,such as `vector`'s element type of `double`
+  - Parameterized Types
+    - 
