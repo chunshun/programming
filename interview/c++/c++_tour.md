@@ -258,6 +258,88 @@ on the free store are independent of the scope from which they are created and l
   ``` 
     - A class that provides the interface to a variety of other classes is often called a *polymorphic type*.
 
-  - classes in class hierarchies
-    -  
+  - virtual function
+    - virtual function table:For the compiler to convert the name of pointers to functions.The table is usually called the *virtual function table* or simply the *vbtl*
+  - class hierarchies
+    - A class hierarchy is a set of class 
+    - A virtual destructor is essential for an abstract class because an object of a derived class is usually manipulated through the interface provided by its abstract base class.
+    - Benefits from hierarchy
+      - **Interface inheritance**:An object of a derived class can be used wherever an object of a base class is required.That is,the base class acts as an interface for the derived class.
+      - **Implementation inheritance**:A base class provides functions on data that simplifies the implementation of derived class.
+      ```c++
+      enum class Kind{circle,triangle,simley};
+      
+      Shape* read_shape(is_stream& is)
+      {
+        switch(k)
+        {
+          case Kind::circle:
+            return new Circle{p,r};
+          case Kind::triangle:
+            return new triangle{p1,p2,p3};
+          case Kind::simley:
+            Smiley* ps = new Smiley{p,r};
+            ps−>add_eye(e1);
+            ps−>add_eye(e2);
+            ps−>set_mouth(m);
+            return ps;
+        }
+      }
+      ```
+    - the aim is to simplify the class hierarchy and organize the data,and more
+  - hierarchy navigation
+    - However, what can we do if we want to use a member function that is only provided by a particular derived class.The function with `virtual` is written in different derived class.Use the `dynamic_cast` methods
 
+  - Avoiding resource leaks 
+  ```c++
+  void user(int x)
+  {
+    Shape* p = new Circle {Point{0,0},10}
+    if(x<0)
+    {
+      throw Bad_x{};
+      //potential leaks
+    }
+    if(x==0) return ;
+    //potential leaks
+    delete p;
+  }
+  ```
+  - One simple solution  is to use a standard library `unique_ptr` rather than a naked pointer when deletion is required.
+  ```c++
+  class Simply
+  {
+    private:
+      vector<uniqiue_ptr<Shape>> eyes;
+      unique_ptr<Shape> mouth;
+
+  }
+
+  ```
+
+- Essential Operations
+  - There are five situations in which an object can be copied or moved.
+    - As the source of an assignment
+    - As an object initializer
+    - As a function argument 
+    - As a function return value
+    - As an exception
+    ```c++
+    class X
+    {
+        public:
+            X(sometype);
+            // ordinary constructor 
+            X(const X&);
+            //copy constructor
+            X(X&&);
+            //move constructor
+            X& operator=(const X&);
+            //copy assignment
+            X& operator=(X&&);
+            //move assignment
+            ~X();
+    };
+    ```
+    move constructor:A move constructor enables the resources owned by an right-value object to be moved into an left-value without copying.
+    
