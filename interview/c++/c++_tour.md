@@ -353,4 +353,7 @@ on the free store are independent of the scope from which they are created and l
 - Templates
   A template is a class or a function that we parameterize with a set of type or values.We use template to represent ideas that are best understood as something general from which we can generate specific types and functions by specifying arguments,such as `vector`'s element type of `double`
   - Parameterized Types
-    - 
+    - Using `class` to introduce a type parameter is equivalent to using `typename`, and in older code we often see `template<class T>` as the prefix.
+
+- Library Overview
+  - 
