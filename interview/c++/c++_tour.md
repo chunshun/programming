@@ -414,4 +414,20 @@ on the free store are independent of the scope from which they are created and l
   - Input
     - By default,a whitespace character,such as a space or a newline, terminates the read
     - I/O of User-Defined Types
-    - 
+  - Output
+    - format output
+    ```c++
+    float i=2.3;
+    cout<<fixed<<i<<"\t"<<hex<<i<<endl;
+    ```
+  - File streams
+    - `ifstream`:for reading from a file
+    - `ofstream`:for writing to a file
+    - `fstream`:for reading from and writing to a file
+
+  - String streams
+    - In `sstream`, the standard library provides streams to and from a `string`;
+    - `isstringstream` for reading from a `string`
+    - `osstringstream` for writing to a `string`
+    - `stringstream` for reading from and writing to a `string`.
+  - 
