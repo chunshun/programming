@@ -398,7 +398,17 @@ on the free store are independent of the scope from which they are created and l
     //auto s=catt({&t[0],3},"string");===>chustring
     //auto  t=catt("ch"sv,"zh"sv); the `sv` suffix means the "string view"
     ```
-    - It can be used for character sequences managed in many different ways.
-    - No temporary `string` arguments are created for C style string arguments.
-    - Can easily pass substrings.
+      - It can be used for character sequences managed in many different ways.
+      - No temporary `string` arguments are created for C style string arguments.
+      - Can easily pass substrings.
+      - The string_view is read-only view of its characters.
+    - Regular expression
+      - `regex_match`:match a regular expression against a string(of known size).
+      - `regex_search`:search for a string that matches a regular expression in an (arbitrary long) of stream data.
+      - `regex_replace`:search for strings that match a regular expression in an(arbitrary long) stream of data and replace them.
+      - `regex_iterator`:Iterator over matches and sub_matches.
+      - `regex_token_iterator`:Iterator over non-matches.
+    - Using iterators or `[]` rather than `at()` when you want to optimize speed.
+    - Using `at()`rather than iterators or `[]` when you want range checking.
+- Input and output
   - 
