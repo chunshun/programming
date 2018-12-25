@@ -411,4 +411,6 @@ on the free store are independent of the scope from which they are created and l
     - Using iterators or `[]` rather than `at()` when you want to optimize speed.
     - Using `at()`rather than iterators or `[]` when you want range checking.
 - Input and output
-  - 
+  - Input
+    - By default,a whitespace character,such as a space or a newline, terminates the read
+    - 
