@@ -430,4 +430,8 @@ on the free store are independent of the scope from which they are created and l
     - `isstringstream` for reading from a `string`
     - `osstringstream` for writing to a `string`
     - `stringstream` for reading from and writing to a `string`.
-  - 
+  - File system
+    - `filesystem`:in the `<filesystem>` header
+    - using the filesystem,can express file system and navigate through a file system
+    - examine file types and the permissions associated with them
+    - 
