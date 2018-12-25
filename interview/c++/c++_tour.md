@@ -396,7 +396,7 @@ on the free store are independent of the scope from which they are created and l
     }
     //string t="chunshun";
     //auto s=catt({&t[0],3},"string");===>chustring
-    //auto  t=catt("ch"sv,"zh"sv);
+    //auto  t=catt("ch"sv,"zh"sv); the `sv` suffix means the "string view"
     ```
     - It can be used for character sequences managed in many different ways.
     - No temporary `string` arguments are created for C style string arguments.
