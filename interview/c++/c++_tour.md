@@ -356,4 +356,24 @@ on the free store are independent of the scope from which they are created and l
     - Using `class` to introduce a type parameter is equivalent to using `typename`, and in older code we often see `template<class T>` as the prefix.
 
 - Library Overview
-  - 
+  - standard-library components
+    - run-time language support
+    - The C standard library 
+    - strings
+    - Support for regular expression matching
+    - I/O streams in an extensible framework
+    - A framework of containers and algorithms(such as `sort`,`find` and `merge`)
+    - Support for concurrent programming,including `threads` and locks
+    - Parallel version of the most STL algorithms and some numerical algorithms
+    - Utilities to support template meta-programming(STL-style generic programming such as `pair`,general programming such as `variant` and `optional`)
+    - Small pointers for resource management, such as `shared_ptr`,`unique_ptr`
+    - Special containers such as `array`,`bisect`,and `tuple`.
+    - Suffixes for popular units,such as `ms` for milliseconds and `i` for imaginary.
+  - Strings
+    ```c++
+    auto s="cat"s;  //init s as type std::string
+    auto t="cat"; //init t as const char*,a C-style string 
+    ```
+    - string implementation
+      - *short string optimization*:only the short string values are kept in the *string* object itself and only longer strings are places on the free store.
+      - 

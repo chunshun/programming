@@ -4,7 +4,8 @@
         "climits": "cpp",
         "iostream": "cpp",
         "array": "cpp",
-        "ostream": "cpp"
+        "ostream": "cpp",
+        "string": "cpp"
     },
     "python.pythonPath": "/usr/local/bin/python3"
 }
