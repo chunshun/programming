@@ -376,4 +376,29 @@ on the free store are independent of the scope from which they are created and l
     ```
     - string implementation
       - *short string optimization*:only the short string values are kept in the *string* object itself and only longer strings are places on the free store.
-      - 
+    - string views  
+      - A `string_views` gives access to contiguous sequence of characters.`string_views:{begin(),size()}`
+     ```c++
+    string catt(string_view v1,string_view v2)
+    {
+        cout<<v1.length()<<"\t"  <<v2.length()<<endl;
+        string res;
+        res.resize(v1.length()+v2.length());
+        char* p=&res[0];
+        for(auto c:v1)
+        {
+            *p++=c;
+        }
+        cout<<"before\t"<<res<<"\n";
+        copy(v2.begin(),v2.end(),p);
+        cout<<"after\t"<<res<<"\n";
+        return res;
+    }
+    //string t="chunshun";
+    //auto s=catt({&t[0],3},"string");===>chustring
+    //auto  t=catt("ch"sv,"zh"sv);
+    ```
+    - It can be used for character sequences managed in many different ways.
+    - No temporary `string` arguments are created for C style string arguments.
+    - Can easily pass substrings.
+  - 
