@@ -434,4 +434,15 @@ on the free store are independent of the scope from which they are created and l
     - `filesystem`:in the `<filesystem>` header
     - using the filesystem,can express file system and navigate through a file system
     - examine file types and the permissions associated with them
+- Containers
+  - *when copying is undesired,references,or pointers,or moving operations should be used*
+  - Elements
+    - If you have a class hierarchy that relies on *virtual* functions to get polymorphic behavior,do not store objects directly in a container.Instead store a pointer(or a smart pointer)
+    ```c++
+    vector<Shape> vs;//no 
+    vector<Shape* >vs ;//yes
+    vector<unique_ptr<Shape*>> vups;//yes
+    ``` 
+  - Range checking
+    - The standard-library doesn't guarantee range checking.
     - 
