@@ -448,4 +448,26 @@ on the free store are independent of the scope from which they are created and l
     - `vector<int>.at()`:check the range to decide whether throw a `out_of_range` error.
   - List
     - the standard lib offers a doubly-linked list called `list`.We use a ` list` for sequences where we want to insert and delete elements without moving other elements
-    - 
+    - The standard lib also offers a singly-linked list called `forward-list`.
+  - Map 
+    - The standard lib offers a balanced binary search tree(usually a red-black tree) called `map`.
+    - In other contexts,a `map` is known as associative array or a dictionary.
+  - Unordered-map
+    - The cost of a `map` lookup is `O(log(n))`.However,in many cases,we can do better by using a hashed lookup rather than a comparison using an ordering function,such as `<`.The standard lib hashed containers are referred to as `unordered`,because they don't require an ordering function:
+    ```c++
+    unordered_map<string,int> phone_book {
+      {"ch", 1},
+      {"zh",2}
+    } 
+    ```
+    - The difference between `map` and `unordered_map` is:
+      - A `map` requires an ordering function(the default is `<`) and yields an ordered sequence
+      - A `unordered_map` requires a hash function and does not maintain an order among its elements.
+    - `vector` optimization:
+    ```c++
+    vector<pair<string,int>> v;
+    v.push_back(pair("ch",1));//not good,make a pair and move it into v
+    v.emplace_back(pair("ch", 1));//good,build a pair in v
+    ```
+- Algorithms
+  - 
