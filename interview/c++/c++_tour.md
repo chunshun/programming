@@ -445,4 +445,7 @@ on the free store are independent of the scope from which they are created and l
     ``` 
   - Range checking
     - The standard-library doesn't guarantee range checking.
+    - `vector<int>.at()`:check the range to decide whether throw a `out_of_range` error.
+  - List
+    - the standard lib offers a doubly-linked list called `list`.We use a ` list` for sequences where we want to insert and delete elements without moving other elements
     - 
