@@ -470,4 +470,5 @@ on the free store are independent of the scope from which they are created and l
     v.emplace_back(pair("ch", 1));//good,build a pair in v
     ```
 - Algorithms
+  - `back_inserter`:constructs an iterator that adds elements at the end of a container,extending the container to make room for them.
   - 
