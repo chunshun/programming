@@ -471,4 +471,62 @@ on the free store are independent of the scope from which they are created and l
     ```
 - Algorithms
   - `back_inserter`:constructs an iterator that adds elements at the end of a container,extending the container to make room for them.
-  - 
+  - Iterator types
+    - What is common for all iterators is their semantics and the naming of their operations.Each container  know its iterator types and makes them available under the conventional names `iterator` and `const_iterator`.For example,the `list<Entry>::iterator` is the general iterator type for `list<Entry>` 
+    - Stream iterators:treat the output as a container.The same as `istream_iterator`.
+    ``` c++
+    ostream_iterator<string> oo {count};
+    *oo="hello";
+    ++oo;
+    *oo="world\n";
+    ```
+    - usage :remove the duplicate of instream
+    ```c++
+    int main(int argc, char const *argv[])
+    {
+        /* code */
+        string from,to;
+
+        std::cin>>from>>to;
+
+        ifstream is {from};
+        istream_iterator<string> ii {is};
+        istream_iterator<string> eos {};
+
+        ofstream os {to};
+        ostream_iterator<string> oo {os,"\n"};
+
+        vector<string> b {ii,eos};
+        sort(b.begin(),b.end());
+
+        unique_copy(b.begin(),b.end(),oo);
+
+        // cout<<!is.eof()|| !os;
+        return !is.eof()|| !os;
+    }
+    ```
+    - An `ifstream` is an `istream` that can be attached  to a file, and an `ofstream` is an `ostream` that can be attached to a file.
+    ```c++
+    //a slower version
+    string from,to;
+    cin>>from>>to;
+    
+    ifstream is {from};
+
+    ofstream os {to};
+
+    set<string> b {istream_iterator<string> {is},istream_iterator<string> {}};
+
+    copy(b.begin(),b.end(),ostream_iterator<string>{os,"\n"});
+
+    return !is.eof()|| !os;
+    ```
+    - `find_if`
+    ```c++
+        auto p=find_if(m.begin(),m.end(),[](const pair<string,int>& r){
+        return r.second>42;
+    });
+    ```
+- parallel algorithms
+  - parallel execution:tasks are done on multiple threads.(ofter running on several process cores)
+  - vectorized execution:tasks are done on a single thread using vectorization,also known as *SIMD*(single instruction,multiple data).
