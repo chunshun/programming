@@ -530,3 +530,24 @@ on the free store are independent of the scope from which they are created and l
 - parallel algorithms
   - parallel execution:tasks are done on multiple threads.(ofter running on several process cores)
   - vectorized execution:tasks are done on a single thread using vectorization,also known as *SIMD*(single instruction,multiple data).
+  - The standard library offers support for both and we can be specific about wanting sequential execution;in `<execution>`,we find:
+    - `seq` :sequential execution
+    - `par`:parallel execution(if feasible)
+    - `par_unseq`:parallel and/or unsequenced(vectorized) execution(if feasible)
+    ```c++
+    sort(v.begin(),v.end());
+    sort(seq,v.begin(),v.end());
+
+    sort(par,v.begin(),v.end());
+    sort(par_unseq,v.begin(),v.end());
+
+    ```
+- Utilities
+  - Resource management 
+    - A resource is something that must be acquired and later released(explicitly or implicitly).Such as memory,locks,thread handles,and file handles.
+    - `unique_ptr` and `shared_ptr`
+      - `uniue_ptr`:to represent unique ownership
+      - `shared_ptr`:to represent shared ownership
+      - The most basic use of these "smart pointers" to prevent memory leaks.
+      - The `shared_ptr` is similar to `unique_ptr` except that `shared_ptr` are copied rather than moved.The object is destroyed when the last of its `shared_ptr` is destroyed.
+      - 
