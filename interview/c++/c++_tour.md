@@ -551,5 +551,34 @@ on the free store are independent of the scope from which they are created and l
       - The most basic use of these "smart pointers" to prevent memory leaks.
       - The `shared_ptr` is similar to `unique_ptr` except that `shared_ptr` are copied rather than moved.The object is destroyed when the last of its `shared_ptr` is destroyed.Use `shared_ptr` only if you actually need shared ownership.
       - pass a pointer to a `shared_ptr` or `unique_ptr`:`make_shared()` or `make_unique()`
-      - 
-      - 
+    - `move` and `forward`
+      - The choice between moving and copying is most implicitly,but we can't copy a `unique_ptr`.
+      - If you want copy a `unique_ptr` elsewhere,you must move it.
+      ```c++
+      void f1()
+      {
+        auto p=make_unique<int>(2);
+        auto q=move(p);
+        //p now holds nullptr
+      }
+      ```
+      - **`std::move` doesn't move anything.Instead,it casts its argument to an rvalue reference,thereby saying that its argument will not be used again and therefore may be moved.It should be something like called `rvalue_cast`**
+      - We don't want to repeatedly copy potentially large objects,so wev request move using `std::move`
+      ```c++
+      template <typename T>
+      void swap(T &a,T &b)
+      {
+          T tmp {move(a)};
+          a=move(b);
+          b=move(tmp);
+          
+      }
+      ```
+    - specialized containers
+      - `pair` and `tuple` are heterogeneous;all other containers are homogeneous(all elements are the same)
+      - `array`,`vector`,and `tuple` elements are contiguously allocated;`forward_list` and `map` are linked structures.
+      - `bitset` and `vector<bool>` holds bits and access them through proxy objects; all other standard library containers can hold a variety of types and access elements directly.
+      - `basic_string` require its elements to be some form of character and to provide string manipulation,such as concatenation and locale-sensitive operations.
+      - `valarrary` requires its elements to be numbers and to provide numerical operations.
+      - `pair` and `tuple`
+        - 
