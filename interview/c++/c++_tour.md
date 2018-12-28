@@ -581,4 +581,65 @@ on the free store are independent of the scope from which they are created and l
       - `basic_string` require its elements to be some form of character and to provide string manipulation,such as concatenation and locale-sensitive operations.
       - `valarrary` requires its elements to be numbers and to provide numerical operations.
       - `pair` and `tuple`
-        - 
+        - pair:the standard library `equal_range` returns a `pair` of iterators specifying a sub-sequence meeting a predicate.Given a **sorted** sequence `[first:last)`,`equal_range()` will return the `pair` representing the subsequence that matches the predicate `cmp`.
+        - tuple:more than two elements,a `tuple` can hold different element types.
+        ```c++
+        auto tup=make_tuple("chunshun",19,2018);
+        auto str=get<0>(tup);
+        //get the first element.str="chunshun"
+
+        ```
+        - get the unique type of tuple:`auto str=get<string>(tup);get<string>(tup)="zhang`
+    - Alternatives
+      - `variant`:to represent one of a specified set of alternatives
+        - `variant` is often a more convenient alternative to explicitly using a `union`.
+      - `optional`:to represent a value of a specified type or no value
+        - An `optional<A>` can be seen as a special kind of `variant` (like a `variant<A,nothing>`) or as a generalization of the idea of `A*` either pointing to an object or being `nullptr`.
+        - An `optional` can be useful for functions that may or may not return an object.
+        - An `optional` is treated as a pointer to its object rather than the object itself.The `optional` equivalent to `nullptr` is the empty object,`{}`.
+        - `optional` is not guaranteed type safe.
+      - `any`:to represent one of an unbounded set of alternatives types
+        - An `any` can hold an arbitrary type and know which type(if any) it holds.It is basically an unconstrained version of `variant`
+    - Allocators
+      - **A pool allocator is an allocator that manages objects of a single fixed size and allocates space for many objects at a time,rather than using individual allocations.**
+      - The pool allocator is defined in the `pmr`(polymorphic memory resource) sub-namespace of `std`.
+        ```c++
+        pmr::synorcherized_pool_resource pool;
+        struct Event{
+            vector<int> data=vector<int> {512,&pool};
+        };
+        list <shared_ptr<Event>> q {&pool};
+
+        void producer()
+        {
+            for(int n=0;n!=LOTS;++n)
+            {
+                scoped_lock lk {m};
+                q.push_back(allocate_shared<Event,pmr::polymorphic_allocator<Event>>{&pool})
+                cv.notify_one();
+            }
+        }
+
+        ```
+    - Time
+      - In `<chrono>`, the standard library provides facilities for dealing with time.
+    - Function Adaption 
+      - When passing a function as a function argument,the type of the argument must exactly match the expression in the called function's declaration.If the intended argument almost matches expectation,we have two alternatives:
+        - Use a lambda;
+        - Use `std::mem_fn` to make a function object from a member function.
+          - Given a member function,the function adaptor `mem_fn(mf)` produces a function object that can be called as a nonmember function.
+          ```c++
+          void draw_all(vector<Shape*>&v)
+          {
+              for_each(v.begin(),v.end(),mem_fun(&Shape::draw));
+          }
+          ```
+        - Define the function to accept a `std::function`
+        ```c++
+        int f1(double);
+        function<int(double)> fct1 {f1};
+
+        ```
+    - Type functions
+      - A type function is a function that is evaluated at compile time given a type as its argument or returning a type.The standard library provides a variety of type functions to help library implementer to write code 
+
