@@ -549,5 +549,7 @@ on the free store are independent of the scope from which they are created and l
       - `uniue_ptr`:to represent unique ownership
       - `shared_ptr`:to represent shared ownership
       - The most basic use of these "smart pointers" to prevent memory leaks.
-      - The `shared_ptr` is similar to `unique_ptr` except that `shared_ptr` are copied rather than moved.The object is destroyed when the last of its `shared_ptr` is destroyed.
+      - The `shared_ptr` is similar to `unique_ptr` except that `shared_ptr` are copied rather than moved.The object is destroyed when the last of its `shared_ptr` is destroyed.Use `shared_ptr` only if you actually need shared ownership.
+      - pass a pointer to a `shared_ptr` or `unique_ptr`:`make_shared()` or `make_unique()`
+      - 
       - 
