@@ -643,3 +643,65 @@ on the free store are independent of the scope from which they are created and l
     - Type functions
       - A type function is a function that is evaluated at compile time given a type as its argument or returning a type.The standard library provides a variety of type functions to help library implementer to write code 
 
+      - The standard library offers the `optional` for multi-change list,
+    - Type predicates
+      - In `<type_traits>`,the standard library offers simple functions,called *type predicates* that answers a fundamental question about types.
+      ```c++
+      auto mask=is_arithmetic<int>();
+      ```
+      - `enable_if`:
+        - obvious way of using type predicates includes conditions for `static_assert`,compile time `if`,and `enable_if`.The standard library `enable_if` is a widely used mechanism for conditionally introducing definitions.Consider defining a `smart pointer`:
+        ```c++
+        template<typename T>
+        class Smart_pointer{
+          T& operator*();
+          T& operator->();
+          //should work if and only if T is a class.
+        }
+        ```
+        The `->` should be defined if and only if `T` is a class type.
+        ```c++
+        template<typename T>
+        class Smart_pointer
+        {
+            T& operator*();
+            std::enable_if<is_class<T>(),T& >operator->();
+        }
+        ```
+        If `enable_if` is true, the type of `operator->()` is `T&`;otherwise,the definition of `operator->()` is ignored.
+- Numerics
+  - numeric algorithms
+  ```c++
+  copy(v.begin(), v.end(), std::ostream_iterator<int>{std::cout, " "});
+
+  ```
+  - parallel algorithms
+    - such as `reduce`,`inclusive_scan`,`transform_exculsive_scan`
+  - random numbers
+    - A random number generator consists of two parts
+      - An engine that produces a sequence of random or pseudo-random values.
+      - A distribution that maps those values into a mathematical distribution in a range.
+  - Vector arithmetric
+    - `<valarray>`:a vector-like template
+- Concurrency
+  - `thread`,`mutex`,`lock`,`packaged_task`,`future`
+  - Tasks and `thread`
+  ```c++
+  void f() { cout << "hello"<<"\n"; }
+
+  struct F {
+    void operator()() { cout << "world"<<"\n"; };
+    /* data */
+  };
+
+  int main() {
+
+    std::thread t1{f};
+    std::thread t2{F()};
+    t1.join();//wait for the thread t1 to terminate
+    t2.join();//wait for the thread t2 to terminate
+
+    return 0;
+  }
+
+  ```
