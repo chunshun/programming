@@ -703,5 +703,52 @@ on the free store are independent of the scope from which they are created and l
 
     return 0;
   }
-
   ```
+  The result is unpredictable and could vary different execution.
+  - **Threads of a program share a single address space.In this,threads differ from process,which generally do not directly share data.Since threads share an address space,they can communicate through shared objects.Such communication is typically controlled by locks or other mechanism to prevent data races(uncontrolled concurrent access to a variable)**.
+  - Passing arguments
+    - Typically,a task needs data to work upon.We can easily pass data as arguments.
+    ```c++
+    void f(vector<double> &v);
+
+    struct F
+    {
+        vector<double> &v;
+        F(vector<double> &vv) : v{vv} {};
+        void operator()() { cout << "world"
+                                 << "\n"; };
+        /* data */
+    };
+
+    int main()
+    {
+
+        vector<double> some_vec{1, 2, 3, 4};
+        vector<double> vec2{10, 11, 12};
+
+        thread t1{f, ref(some_vec)};
+        thread t2{F{vec2}};
+        t1.join();
+        t2.join();
+
+        return 0;
+    }
+
+    ```
+    - Returning results
+      - returning results through references.
+    - Sharing data
+      - The fundamental element of the solution is a `mutex`,"a mutual exclusion object".A thread acquires a `mutex` using a `lock` operation.
+      ```c++
+      mutex m;
+      int sh;
+      void f()
+      {
+          scoped_lock lck{m};
+          sh += 7;
+      }
+      //the scoped_lock's constructor acquires the mutex(through a mlock()). If another thread acquires the mutex,the thread waits until the other thread completes its access to the data.Once a thread has completed its access,the `scoped_lock` releases the mutex(with m.unlock())
+      ```
+    - waiting for events
+    - Communicating tasks
+    - 
