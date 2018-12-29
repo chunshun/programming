@@ -748,7 +748,10 @@ on the free store are independent of the scope from which they are created and l
           sh += 7;
       }
       //the scoped_lock's constructor acquires the mutex(through a mlock()). If another thread acquires the mutex,the thread waits until the other thread completes its access to the data.Once a thread has completed its access,the `scoped_lock` releases the mutex(with m.unlock())
+      scoped_lock lck {mutex1,mutex2,mutex3};
+      //this `scoped_lock` will procedd only after acquiring all its `mutex` arguments and will never block("go to sleep"),while holding a `mutex`.The destructor for `scoped_lock` ensures that the `mutex` are released when a `thread` leaved the scope.
       ```
     - waiting for events
+      - Sometimes,a thread has to wait for some kind of external event. 
     - Communicating tasks
     - 
