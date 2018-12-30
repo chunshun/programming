@@ -751,7 +751,32 @@ on the free store are independent of the scope from which they are created and l
       scoped_lock lck {mutex1,mutex2,mutex3};
       //this `scoped_lock` will procedd only after acquiring all its `mutex` arguments and will never block("go to sleep"),while holding a `mutex`.The destructor for `scoped_lock` ensures that the `mutex` are released when a `thread` leaved the scope.
       ```
+      - One of the most common ways of sharing data is among many readers and a single writer.This `reader-writing` lock idiom is supported be `shared_mutex`.A reader will acquire the mutex "shared" so that other readers can still gain access,whereas a writer will demand exclusive access.
+      ```c++
+      shared_mutex mx;
+
+      void reader()
+      {
+          shared_lock lck{mx};
+          // read
+      }
+
+      void writer()
+      {
+          unique_lock lck{mx};
+          //write
+      }
+      ```
     - waiting for events
       - Sometimes,a thread has to wait for some kind of external event. 
-    - Communicating tasks
-    - 
+      - The basic support for communicating using external events is provided by `condition_variable` found in `<condition_variable>`. A condition_variable is a mechanism allowing one thread to wait for another.In particular,it allows a thread to wait for some *condition*(often called the event) to occur as the result of work done by other threads.
+      - `unique_lock` vs `shared_lock`:
+        - A `scoped_lock` cann't be copied,but a `unique_lock` can be.
+        - A `unique_lock` offers operations,such as `lock()` and `unlock()`,for lower level control of synchronization.
+        - `unique_lock` can only handle a single mutex.
+    - Communicating tasks(high level in `<future>`)
+      - `future` and `promise` for returning a value from a task spawned on a separate thread.
+        - The important point about `future` and `promise` is that they enable a transfer of a value between two tasks without explicit use of a lock,the system implementsthe transfer efficiently.
+        - The main purpose of a `promise` is to provide simple "put" operations(called `set_value` and `set_exception`) to match *future's get()*.
+      - `packaged_task` to help launch tasks and connect up the mechanisms for returning a result.
+      - `async` for launching of a task in a manner very similar to calling a function.
