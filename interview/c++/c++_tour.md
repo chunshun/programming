@@ -342,6 +342,25 @@ on the free store are independent of the scope from which they are created and l
     };
     ```
     move constructor:A move constructor enables the resources owned by an right-value object to be moved into an left-value without copying.
+  - An assignment uses a copy or move assignment operator.
+  - Conversations
+    - A constructor taking a single argument defines a conversation from its argument type.
+    - Copy and Move
+      - The default meaning of copy is memberwise copy:copy each member.
+      ```c++
+      void test(complex z1)
+      {
+          complex z2 {z1};
+          complex z3;
+          z3=z2;
+      }
+      ```
+      For some sophisticated concrete types,memberwise copy is not the right semantics for copy;for abstract types it almost never is.
+      - Copying containers
+        - When a class is a *resource handle*-that is,when the class is responsible for an object accessed through a pointer- the default memberwise copy is typically a disaster.The default copy,such as `Vector` would leave a copy of `Vector` referring to the same elements as the original.
+        - Copying of an object of a class is defined by two members:a *copy constructor* and a *copy assignment*.
+        - 
+        - 
   - container operations
   ```c++
   for(auto p=c.begin();p!=c.end();++p)
