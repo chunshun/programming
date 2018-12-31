@@ -359,8 +359,11 @@ on the free store are independent of the scope from which they are created and l
       - Copying containers
         - When a class is a *resource handle*-that is,when the class is responsible for an object accessed through a pointer- the default memberwise copy is typically a disaster.The default copy,such as `Vector` would leave a copy of `Vector` referring to the same elements as the original.
         - Copying of an object of a class is defined by two members:a *copy constructor* and a *copy assignment*.
-        - 
-        - 
+          - The name `this` is predefined in a member function and points to the object for which the member function is called.
+      - Moving containers
+        - We can control copying by defining a copy constructor and a copy assignment,but copying can be costly for large containers.We can't return a reference to a local object as the result(the local object would be destroyed by the time the caller got a chance to look at it).
+        - The `&&` means "rvalue reference" and is a reference to which we can bind an value."lvalue" means "something that can appear on the left-hand side for an assignment",so an rvalue is-to a first approximation-a value that you can't assign to,such as an integer returned by a function call.**Thus,an rvalue is a reference to something that nobody can assign to ,so we can safely steal its value.**
+      - Resource management
   - container operations
   ```c++
   for(auto p=c.begin();p!=c.end();++p)
