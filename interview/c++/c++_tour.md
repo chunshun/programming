@@ -776,7 +776,32 @@ on the free store are independent of the scope from which they are created and l
         - `unique_lock` can only handle a single mutex.
     - Communicating tasks(high level in `<future>`)
       - `future` and `promise` for returning a value from a task spawned on a separate thread.
-        - The important point about `future` and `promise` is that they enable a transfer of a value between two tasks without explicit use of a lock,the system implementsthe transfer efficiently.
+        - The important point about `future` and `promise` is that they enable a transfer of a value between two tasks without explicit use of a lock,the system implements the transfer efficiently.
         - The main purpose of a `promise` is to provide simple "put" operations(called `set_value` and `set_exception`) to match *future's get()*.
-      - `packaged_task` to help launch tasks and connect up the mechanisms for returning a result.
+      - `packaged_task` to help launch tasks and connect up the mechanisms for returning a result.`using task_type=double(double*,double*,double);
+    //a double function(double*,double*,double)`
+        - The packaged_task type is provided to simplify up tasks connected with future and promise to be run on threads.A packaged_task provides wrapper code to put the return value or exception from the task into a promise.The `packaged_task` templates takes the type of the task as its template argument(here `Task_type`,an `move` is needed,because `packaged_task` cannot be copied). The reason that a `packaged_type` cannot be copied is that it is a resource handle:It owns its promise and is responsible for whatever resources its task may own.
+          ```c++
+          double acc(double *start, double *end, double init)
+          {
+              return accumulate(start, end, init);
+          }
+          double comp2(vector<double> &v)
+          {
+              using Task_type = double(double *, double *, double);
+              vector<double> v;
+              packaged_task<Task_type> pt0{acc};
+              packaged_task<Task_type> pt1{acc};
+
+              future<double> f0{pt0.get_future()};
+              future<double> f1{pt1.get_future()};
+
+              double *first = &v[0];
+              thread t1{move(pt0), first, first + v.size() / 2, 0};
+              thread t2{move(pt1), first + v.size() / 2, first + v.size(), 0};
+
+              return f0.get() + f1.get();
+          }
+        ```
+
       - `async` for launching of a task in a manner very similar to calling a function.
