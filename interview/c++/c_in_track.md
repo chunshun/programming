@@ -1,2 +1,21 @@
 1. In C, functions can return any type except arrays and functions. We can get around this limitation by returning pointer to array or pointer to function.
-2. 
+2. Concurrency in C++
+    - parallel execution
+      - In `<execution>`:  
+        - `seq`:sequential execution
+        - `par`:parallel execution
+        - `par_unseq`:parallel and/or un-sequenced(vectorized) execution
+    - parallel algorithms(In `<numeric>`)
+      - such as `reduce(par_unseq,v.begin(),v.end())`
+    - Use `scoped_lock` to manage `mutex`
+    - Use `scoped_lock` to acquire multiple locks.
+    - Use `shared_lock` to implement reader_write locks.
+    - Use `condition_variable` to manage communications among `threads`
+    - Use `unique_lock`(rather than `scoped_lock`) when you need to copy a lock or need lower-level manipulations of synchronization;
+    - Use `unique_lock` rather than `scoped_lock` with `condition_variable`
+    - Think in terms of tasks that can be executed concurrently,rather than directly in terms of `threads`;
+    - Prefer `packaged_task` and `future` over direct use of `thread` and `mutex`;
+    - Returning a result using a `promise` and get a result from a `future`;
+    - Use `packaged_task` to handle exception thrown by tasks and arrange for value return;
+    - Use a `packaged_task` and a `future` to express a request to an external service and wait for its response;
+    - Use `async` to launch simple tasks;

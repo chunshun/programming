@@ -792,16 +792,31 @@ on the free store are independent of the scope from which they are created and l
               vector<double> v;
               packaged_task<Task_type> pt0{acc};
               packaged_task<Task_type> pt1{acc};
-
               future<double> f0{pt0.get_future()};
               future<double> f1{pt1.get_future()};
-
               double *first = &v[0];
               thread t1{move(pt0), first, first + v.size() / 2, 0};
               thread t2{move(pt1), first + v.size() / 2, first + v.size(), 0};
-
               return f0.get() + f1.get();
           }
         ```
-
       - `async` for launching of a task in a manner very similar to calling a function.
+        - treat a task as a function that may happen to run concurrently with other tasks.
+        ```c++
+        double accum(double* start,double*end,double init)
+        {
+            return accumulate(start,end,init);
+        }
+        double compose(vector<double>& v)
+        {
+            if(v.size()<1000)
+                return accum(v.begin(),v.end(),0.0);
+            auto v0=&v[0];
+            auto sz=v.size();
+            auto f0=async(accum,v0,v0+sz/4,0.0);
+            auto f1=async(accum,v0+sz/4,v0+sz/2,0.0);
+            auto f2=async(accum,v0+sz/2,v0+3*sz/4,0.0);
+            auto f3=async(accum,v0+3*sz/4,v0+sz,0.0);
+            return f0.get()+f1.get()+f2.get()+f3.get();
+        }
+        ```
