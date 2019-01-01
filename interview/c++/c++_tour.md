@@ -377,6 +377,186 @@ on the free store are independent of the scope from which they are created and l
   - Parameterized Types
     - Using `class` to introduce a type parameter is equivalent to using `typename`, and in older code we often see `template<class T>` as the prefix.
 
+    - concepts:constrained templates
+  - Value template arguments
+  - Template Argument Deduction 
+    ```c++
+    auto pair1=make_pair(1,2);
+    ```
+  - Parameterized operations
+    - There are three ways of expressing an operation parameterized by types or values:
+      - A function template
+      - A function object:an object that can carry data and be called like a function
+      - A lambda expression:a shorthand notation for a function object.
+    - Function templates:
+    ```c++
+    template<typename Sequence,typename Value>
+    Value sum(const Sequence& s,Value v)
+    {
+        for(auto x:s)
+        {
+            v+=x;
+        }
+        return v;
+
+    }
+    vector<int> v {1,2,3};
+    auto value=sum(v,0);
+    vector<complex<int>> vc ;
+    auto val=sum(vc,0.0);
+    ```
+    - Function objects
+      - One particularly useful kind of template is the *function object*(sometimes called c *functor*),which is used to define objects that can be called like functions.
+      ```c++
+      template<typename T>
+      class Less_than
+      {
+      <!-- private: -->
+          /* data */
+          const T val;
+      public:
+          Less_than(const T& v):val{v}{};
+          bool operator()(const T&v) const {
+              return x<val;
+          }
+      };
+      Less_than<int> lti {42};
+      bool bt1=lti(32);
+
+      Less_than lstr {"chunshun"s};
+      Less_than<string> lstr {"chunshun"};
+
+
+      template<typename C,typename P>
+      int count(const C& c,P pred)
+      {
+          int cnt=0;
+          for(const auto& x: c)
+          {
+              if (pred(x)) ++cnt;
+          }
+          return cnt;
+      }
+       cout<<count(v,lti(32));
+      ```
+      - Lambda expressions
+      ```c++
+      count(v,[&](int a){
+          return a>32;
+      });
+      ```
+      The `[&]`is a *capture list* specifying that all local names used in the lambda body will be accessed through references.
+      ```c++
+      template<typename C,typename Oper>
+      void for_all(C&c,Oper op)
+      {
+          for(auto &x:c)
+          {
+              op(x);
+          }
+      }
+      template<class S>
+      void rotate_and_draw(vector<S> & v,int r)
+      {
+          for_all(v,[](auto &s){
+              s->rotate();
+              s->draw();
+          })
+
+      }
+      ```
+    - Template Mechanisms
+      - To define good templates:
+        - Values dependent on a type:variable template;
+        - Aliases for types and templates:alias templates
+        - A compiler-time selection mechanism:`if constexp`;
+        - A compile-time mechanism to inquire about properties of types and expressions:`require-`expressions.
+      - In addition,`constexp` and `static_cast` often take part in template design and use.
+      - Variable design
+      ```c++
+      template<class T>
+          constexpr T viscosity =0.4;
+      template<class T>
+          constexpr vector<T> external_accleration={T{},T{-9.8},T{}};
+      auto vis2=2*viscosity<double>;
+      auto acc=external_accleration<float>;
+      template<class T,class S>
+          constexpr bool Assignment=is_assignable<T&,S>::value;
+      template<class T>
+      void testing()
+      {
+          static_assert(Assignment<T&,double>,"can't assign a double");
+          static_assert(Assignment<T&,string>,"can't assign a string");
+      }
+      ```
+      - Aliases
+      ```c++
+      template<class T>
+      using value_type=class T::value_type;
+
+      template<class Container>
+      void algo(Container &c)
+      {
+        vector<value_type<Container>> vec;
+      }
+      ```
+      - Compile time `if`
+        - In C++17,we can use a compile-time `if`(<type_traits>)
+        ```c++
+        template<class T>
+        void update(T& target)
+        {
+            if constexpr(is_pod<T>::value)
+                simple_and_fast(target);
+            else
+                slow_and_safe(target);
+        }
+        ```
+      - A virtual function member cannot be a template member function.
+- Concepts and generic programming
+  - templates provide a powerful mechanism for compile-time computation and type manipulation that can lead to every compact and efficient code.
+  - The rules for concept-based overloading are far simpler than the rules for general overloading.
+  - Definition of concepts
+  ```c++
+  template<typename T>
+  concept Equality_proper=requires(T a,T b){
+      {a==b}->bool;
+      {a!=b}->bool;
+  }
+  ```
+  - Generic programming
+    - Use of concepts
+    - Abstraction using templates
+      - The best way to develop a template is often to;
+        - first,write a concrete version
+        - debug,test,and measure it
+        - replace the concrete types with template arguments
+      - Variadic arguments
+        - `...`:parameter pack
+        - Fold expressions(In C++17)
+        ```c++
+        template<typename...T>
+        int sum(T...v)
+        {
+           return (v+...+0);
+           //right fold
+        }
+        int main(int argc, char const *argv[])
+        {
+            cout<<"hello";
+            cout<<sum(1,2,3,4,5);
+            return 0;
+        }
+
+
+        template<typename Res,typename... Ts>
+        vector<Res> to_vector(Ts&&... ts)
+        {
+            vector<Res> res;
+            (res.push_back(ts) ...);
+            return res;
+        }
+        ```
 - Library Overview
   - standard-library components
     - run-time language support
@@ -403,7 +583,7 @@ on the free store are independent of the scope from which they are created and l
      ```c++
     string catt(string_view v1,string_view v2)
     {
-        cout<<v1.length()<<"\t"  <<v2.length()<<endl;
+        cout<<v1.length()<<"\t"<<v2.length()<<endl;
         string res;
         res.resize(v1.length()+v2.length());
         char* p=&res[0];
