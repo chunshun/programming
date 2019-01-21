@@ -23,3 +23,11 @@ echo "$(cd "$(dirname "$1")"; pwd -P)/$(basename "$1")"
 ```shell
 du -Sh ./* | sort -rh|head |cut  -f 2
 ```
+- `**` operator
+```shell
+wc -l ./**/*.scala
+```
+- odd/even number
+```shell
+sed -n 2~2p filename
+```
