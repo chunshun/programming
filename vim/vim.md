@@ -134,4 +134,9 @@ copy,paste,cut
 - switch between vim and others
     - `ctrl z`:suspend the vim and `f g`:return to vim
     - `:sh`: enter the shell and `ctrl d`: to exit the shell
-    - 
+- multi-line coment
+    - ctrl+v:enter visual block mode
+    - shift+i: enter insert mode
+    - `j,k`:select multi-line
+    - `//`: comment the line
+    - `esc,esc`: press the `esc` command twice and comment the lines
