@@ -1,0 +1,64 @@
+- socket programming
+  - accept=>bind=>listen
+- tcp 三次握手
+  - accept(backblog)
+- tcp vs udp
+  - TCP（Transmission Control Protocol 传输控制协议）是一种面向连接的、可靠的、基于字节流的传输层通信协议。
+  - UDP(User Datagram Protocol用户数据报协议）是OSI（Open System Interconnection，开放式系统互联） 参考模型中一种无连接的传输层协议，提供面向事务的简单不可靠信息传送服务。
+  - TCP 是面向连接的传输控制协议，而UDP提供了无链接的数据报服务//类似电话与短信
+  - TCP 面向连接，提供可靠的数据服务
+  - TCP首部开销20字节,UDP首部开销8字节
+  - TCP逻辑通信信道是全双工的可靠信道，UDP则是不可靠信道
+  - UDP没有拥塞机制，因此网络出现拥堵不会使源主机的发送效率降低（有利于实时会议视频等）
+  - TCP的连接只能是点到点的,UDP支持一对一，多对一，多对多的交互通信
+- session vs cookie
+  - Cookies是服务器在本地机器上存储的小段文本并随每一个请求发送至同一个服务器
+  - session机制是一种服务器端的机制，服务器使用一种类似于散列表的结构（也可能就是使用散列表）来保存信息。
+    - 当程序需要为某个客户端的请求创建一个session时，服务器首先检查这个客户端的请求里是否已包含了一个session标识（称为session id），如果已包含则说明以前已经为此客户端创建过session，服务器就按照session id把这个session检索出来使用（检索不到，会新建一个），如果客户端请求不包含session id，则为此客户端创建一个session并且生成一个与此session相关联的session id，session id的值应该是一个既不会重复，又不容易被找到规律以仿造的字符串，这个session id将被在本次响应中返回给客户端保存。
+  - 二者不同
+    - 存取方式的不同
+    - 隐私政策的不同
+    - 有效期上的不同
+    - 服务器压力上的不同
+    - 浏览器主持的不同
+    - 跨域支持上的不同
+- mysql与 hive 的不同
+- http headers 
+- python exception
+- get vs post
+  - get:从指定的资源请求数据
+  - post：向指定的资源提交要被处理的数据
+  - get vs post:
+- http status code
+  - 1xx (Informational): The request was received, continuing process
+  - 2xx (Successful): The request was successfully received, understood, and accepted
+  - 3xx (Redirection): Further action needs to be taken in order to complete the request
+  - 4xx (Client Error): The request contains bad syntax or cannot be fulfilled
+  - 5xx (Server Error): The server failed to fulfill an apparently valid request
+- http headers
+  - 一般头：同时适用于请求和响应消息，但与最终消息主体中传输的数据无关的消息头
+  - 请求头: 包含更多有关要获取的资源或客户端本身信息的消息头。
+  - 响应头：包含有关响应的补充信息，如其位置或服务器本身（名称和版本等）的消息头。
+  - 实体头：包含有关响应的补充信息，如其位置或服务器本身（名称和版本等）的消息头
+  - Accept/Content-encoding/Content-length/Cookie/Host
+-  multiprocessing vs threading
+  - cpu 密集型：多进程
+  - I/O 密集：密集型
+  - python 由于GIL锁存在，Pyhton 里有一个进程永远只能同时执行一个线程（拿到GIL的线程才能执行），这就是为什么在多核CPU上，Python的多线程效率并不高的原因。在非python环境中，单核情况下，同时只能有一个任务执行。多核时可以支持多个线程同时执行。但是在python中，无论有多少核，同时只能执行一个线程。究其原因，这就是由于GIL的存在导致的。
+  - python多线程的工作流程：
+    - 拿到公共数据
+    - 申请GIL
+    - python 解释器调用os原生线程
+    - os操作cpu执行计算
+    - 当该进程执行时间到后，无论运算是否执行完，GIL都被要求释放
+    - 进程由其他进程重复上面的过程
+    - 等其他进程执行完后， 又会切换到之前的线程，整个过程是每个线程执行自己的计算，当执行时间到就进行切换。
+- IO 模式
+  - 阻塞IO
+  - 非阻塞IO
+  - I/O多路复用(event driven io).select/epoll 的好处就在于单个 process 就可以同时处理多个网络连接的IO。它的基本原理就是select，poll，epoll 这个 function 会不断的轮询所负责的所有socket，当某个socket有数据到达了，就通知用户进程。所以，I/O 多路复用的特点是通过一种机制一个进程能同时等待多个文件描述符，而这些文件描述符（套接字描述符）其中的任意一个进入读就绪状态，select()函数就可以返回。
+    - select
+    - poll
+    - epoll
+  - 信号驱动I/O
+  - 异步I/O
