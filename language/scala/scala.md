@@ -138,3 +138,12 @@ implicit class StringImprovements(s: String) {
 val rdd:RDD[(String,Optional[Int])]
 rdd.flatMapValues(l=>l):RDD[(String,Int)]
 ```
+- Adding JAR Files and Classes to the REPL Classpath
+```scala
+$ scala -cp path_to_jar.jar
+scala> import org.com.utils._
+```
+In Spark-shell,`./spark-shell --jars pathOfjarsWithCommaSeprated` or
+```scala
+scala> :require /path/to/file.jar
+```
