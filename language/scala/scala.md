@@ -133,4 +133,8 @@ implicit class StringImprovements(s: String) {
 "HAL".increment
 //IBM
 ```
-  
+- Option with RDD
+```scala
+val rdd:RDD[(String,Optional[Int])]
+rdd.flatMapValues(l=>l):RDD[(String,Int)]
+```
