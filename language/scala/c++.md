@@ -1,4 +1,5 @@
 # c++
+- `std::adjacent_find`
 ```c++
     std::vector<int> v1{0, 1, 2, 3, 40, 40, 41, 41, 5};
     auto i2 = std::adjacent_find(v1.begin(), v1.end(), std::greater<int>());
