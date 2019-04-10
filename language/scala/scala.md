@@ -158,4 +158,8 @@ val op=Option.empty[Person]
 ```scala
 val Op=Option(1)
 //Op:Option[Int]=Some(1)
+
+case class Name(name:String)
+val name=Option(Name("chunshun"))
+//name:Option[Name]=Some(Name("chunshun"))
 ```
