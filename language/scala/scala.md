@@ -147,3 +147,10 @@ In Spark-shell,`./spark-shell --jars pathOfjarsWithCommaSeprated` or
 ```scala
 scala> :require /path/to/file.jar
 ```
+- None of onject
+```scala
+val op=None:Option[Person]
+//or 
+val op=Option.empty[Person]
+
+```
