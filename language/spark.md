@@ -1,0 +1,3 @@
+- Hive
+  - `DataFrame.printSchema`:print the schema to parse
+  - `java.lang.NullPointerException`:`select * from table where col is not null`
