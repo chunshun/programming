@@ -34,3 +34,5 @@ for(auto i:vv)
 string s{10,'-'};
 //----------
 ```
+- `p++` vs `++p`
+A `++p` returns a reference to `p`,whereas `p++` must return a copy of `p` holding the old value.Thus,for more compilcated iterators,`++p` is likely to be more efficient than `p++`.
