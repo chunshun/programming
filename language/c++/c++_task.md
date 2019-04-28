@@ -29,3 +29,8 @@ for(auto i:vv)
   cout<<i<<" ";
 }
 ```
+- string multiply
+```c++
+string s{10,'-'};
+//----------
+```
