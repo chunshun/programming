@@ -163,3 +163,10 @@ case class Name(name:String)
 val name=Option(Name("chunshun"))
 //name:Option[Name]=Some(Name("chunshun"))
 ```
+- Function tupled
+```scala
+val time="20190429"
+val cut=Array(0,4,6,8)
+val c=cut.dropRight(1).zip(cut.drop(1))
+val Array(year,month,day)=c.map(l=>(time.slice(_,_)).tupled(l))
+```
