@@ -31,7 +31,7 @@ for(auto i:vv)
 ```
 - string multiply
 ```c++
-string s{10,'-'};
+string s(10,'-');
 //----------
 ```
 - `p++` vs `++p`  
