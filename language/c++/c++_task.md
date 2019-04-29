@@ -54,3 +54,17 @@ iterator it3 =prev(it1,3
 v.rbegin()[3]=-3;
 
 ```
+- Insert iterators
+  - `insert_iterator`:insert before the element pointed to using `insert()`
+  - `front_insert_iterator`:inserts before the first element of a sequence using `push_front`
+  - `back_insert_iterator`:insert after the last element of the sequence using `push_back`
+- `std:: advance` vs `std::next`
+  - `std::advance`:
+    - returns nothing 
+    - modify its argument
+    - works on input iterator or better(or bit-directional iterator if a negative distance is given)
+  - `std::next`
+    - leaves its argument unmodified
+    - returns a copy of the argument,advanced by the specified amount
+    - works on forward iterators or better(or bi-directional iterators if a negative distance is given)
+- 
