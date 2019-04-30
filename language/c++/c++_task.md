@@ -31,7 +31,7 @@ for(auto i:vv)
 ```
 - string multiply
 ```c++
-string s{10,'-'};
+string s(10,'-');
 //----------
 ```
 - `p++` vs `++p`  
@@ -69,6 +69,7 @@ v.rbegin()[3]=-3;
     - leaves its argument unmodified
     - returns a copy of the argument,advanced by the specified amount
     - works on forward iterators or better(or bi-directional iterators if a negative distance is given)
+<<<<<<< HEAD
 - Move iterator
 - Function Objects
 - Function Adapters
@@ -77,3 +78,6 @@ v.rbegin()[3]=-3;
   - Template instantiation :From a template function and a set of template arguments,a function needs to be generated.This process is commonly called `template instantiation`
 
 # The standard library
+=======
+- 
+>>>>>>> 4e63a357629ee18039c95df765972c2ea6ddce2b
