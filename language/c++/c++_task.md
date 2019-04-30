@@ -38,8 +38,8 @@ string s{10,'-'};
 A `++p` returns a reference to `p`,whereas `p++` must return a copy of `p` holding the old value.Thus,for more compilcated iterators,`++p` is likely to be more efficient than `p++`.
 - `iterator` operations
 ```c++
-q=advance(it,3)
-// iterator q=it+3
+advance(it,3)
+// iterator it=it+3
 int x=distance(it1,it2)
 
 
@@ -49,6 +49,8 @@ iterator it3 =prev(it1,3
 // it1 must be at least a bidirectional iterator
 
 ```
+- `for_each`
+  In C++, you can use `for_each` in all the containers.
 - reverse iterator
 ```c++
 v.rbegin()[3]=-3;
@@ -67,4 +69,11 @@ v.rbegin()[3]=-3;
     - leaves its argument unmodified
     - returns a copy of the argument,advanced by the specified amount
     - works on forward iterators or better(or bi-directional iterators if a negative distance is given)
-- 
+- Move iterator
+- Function Objects
+- Function Adapters
+    A function adapter takes a function as argument and returns a function object that can be used to invoke the original function.The `bind` and `mem_fn` adaptors do argument binding,also called `Currying or Partial evaluation` 
+- Instantiation
+  - Template instantiation :From a template function and a set of template arguments,a function needs to be generated.This process is commonly called `template instantiation`
+
+# The standard library
