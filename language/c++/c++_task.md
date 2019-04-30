@@ -77,4 +77,6 @@ v.rbegin()[3]=-3;
   - Template instantiation :From a template function and a set of template arguments,a function needs to be generated.This process is commonly called `template instantiation`
 
 # The standard library
+- Iterators provide the mechanism to make standard algorithms generic
+- `initializer-list`:does not support a subscript operator.If you want to use `[]` rather than `*`,subscript a pointer.
 - 
