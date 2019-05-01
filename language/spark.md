@@ -1,3 +1,5 @@
 - Hive
   - `DataFrame.printSchema`:print the schema to parse
   - `java.lang.NullPointerException`:`select * from table where col is not null`
+- Spark
+  - `akka.frameSize`:increase the frameSize or change to the **broadcast** type
