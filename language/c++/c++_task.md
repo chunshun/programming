@@ -67,4 +67,9 @@ v.rbegin()[3]=-3;
     - leaves its argument unmodified
     - returns a copy of the argument,advanced by the specified amount
     - works on forward iterators or better(or bi-directional iterators if a negative distance is given)
-- 
+- `string` to `int`:`std::stoi`
+- fill the container start from int A
+```c++
+vector<int> v(9);
+std::iota(v.begin(), v.end(), 80);
+```
