@@ -170,3 +170,12 @@ val cut=Array(0,4,6,8)
 val c=cut.dropRight(1).zip(cut.drop(1))
 val Array(year,month,day)=c.map(l=>(time.slice(_,_)).tupled(l))
 ```
+- Scala unpack Array params
+```scala
+def hello( names: String*) {
+  println( "Hello " + names.mkString(" and " ) )
+}
+val names = List("john", "paul", "george", "ringo")
+hello( names: _* )
+// Hello john and paul and george and ringo    
+```

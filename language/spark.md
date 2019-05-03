@@ -3,3 +3,6 @@
   - `java.lang.NullPointerException`:`select * from table where col is not null`
 - Spark
   - `akka.frameSize`:increase the frameSize or change to the **broadcast** type
+- Iterators
+  - In contrast to Spark transformations,iterator transformations are executed linearly, one element at a time,rather than in parallel.This makes iterators slower but much easier to use if they could be executed in parallel.
+  - 
