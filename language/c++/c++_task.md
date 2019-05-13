@@ -69,14 +69,12 @@ v.rbegin()[3]=-3;
     - leaves its argument unmodified
     - returns a copy of the argument,advanced by the specified amount
     - works on forward iterators or better(or bi-directional iterators if a negative distance is given)
-<<<<<<< HEAD
 - `string` to `int`:`std::stoi`
 - fill the container start from int A
 ```c++
 vector<int> v(9);
 std::iota(v.begin(), v.end(), 80);
 ```
-=======
 - Move iterator
 - Function Objects
 - Function Adapters
@@ -88,4 +86,3 @@ std::iota(v.begin(), v.end(), 80);
 - Iterators provide the mechanism to make standard algorithms generic
 - `initializer-list`:does not support a subscript operator.If you want to use `[]` rather than `*`,subscript a pointer.
 - 
->>>>>>> d8cdcb3a6addabfd7cdead10d263fb2ac6892703
