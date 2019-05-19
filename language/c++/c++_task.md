@@ -85,4 +85,4 @@ std::iota(v.begin(), v.end(), 80);
 # The standard library
 - Iterators provide the mechanism to make standard algorithms generic
 - `initializer-list`:does not support a subscript operator.If you want to use `[]` rather than `*`,subscript a pointer.
-- 
+- try
