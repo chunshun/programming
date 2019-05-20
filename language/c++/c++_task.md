@@ -85,4 +85,13 @@ std::iota(v.begin(), v.end(), 80);
 # The standard library
 - Iterators provide the mechanism to make standard algorithms generic
 - `initializer-list`:does not support a subscript operator.If you want to use `[]` rather than `*`,subscript a pointer.
-- 
+-  Generalized numeric algorithms
+   - `accumulate`
+   - `partial_sum` and `adjacent_difference`:inverse of each other and deal with the notion of incremental change.
+
+
+# Class constructors
+- `()` vs `{}`
+  - `()`:use *value initialization* if the parameters are empty,or *direct initialization* if non-empty.
+  - `{}`:use *list initialization*,which implies *value initialization*  if the braces are empty,or `aggregate initialization` if the initialized object is an aggregate.
+  
