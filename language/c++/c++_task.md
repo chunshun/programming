@@ -121,4 +121,3 @@ auto cube2 = bind(cube,2);
   - stringstream
 - Stream iterators
   - 
->>>>>>> 9a57110dafe701445ee3f8f2493d571e5f2e075f
