@@ -85,17 +85,40 @@ std::iota(v.begin(), v.end(), 80);
 # The standard library
 - Iterators provide the mechanism to make standard algorithms generic
 - `initializer-list`:does not support a subscript operator.If you want to use `[]` rather than `*`,subscript a pointer.
-<<<<<<< HEAD
 -  Generalized numeric algorithms
    - `accumulate`
    - `partial_sum` and `adjacent_difference`:inverse of each other and deal with the notion of incremental change.
-
 
 # Class constructors
 - `()` vs `{}`
   - `()`:use *value initialization* if the parameters are empty,or *direct initialization* if non-empty.
   - `{}`:use *list initialization*,which implies *value initialization*  if the braces are empty,or `aggregate initialization` if the initialized object is an aggregate.
-  
-=======
-- try
->>>>>>> 468b8438f4f4b9a2e10d3951d6ddd46a65d57a92
+
+# Iterators
+Iterators are the glue that ties Standard Library algorithms and their data
+- Iterator categories
+  - input iterator:`istream`
+  - output iterator:`ostream`
+  - forward iterator
+  - Bidirectional iterator
+  - random access iterator
+- curried:`bind`
+```c++
+double cube(double);
+auto cube2 = bind(cube,2);
+```
+- File streams
+  - stream modes
+    - `ios_base::app`:append
+    - `ios_base::ate`:at the end
+    - `ios_base::binary`:binary mode;beware of system-specific behavior
+    - `ios_base::in`:for reading
+    - `ios_base::out`:for writing
+    - `ios_base::trunc`:truncate the file to 0 length
+- String streams
+  - istringstream
+  - ostringstream
+  - stringstream
+- Stream iterators
+  - 
+>>>>>>> 9a57110dafe701445ee3f8f2493d571e5f2e075f
