@@ -85,4 +85,30 @@ std::iota(v.begin(), v.end(), 80);
 # The standard library
 - Iterators provide the mechanism to make standard algorithms generic
 - `initializer-list`:does not support a subscript operator.If you want to use `[]` rather than `*`,subscript a pointer.
-- try
+# Iterators
+Iterators are the glue that ties Standard Library algorithms and their data
+- Iterator categories
+  - input iterator:`istream`
+  - output iterator:`ostream`
+  - forward iterator
+  - Bidirectional iterator
+  - random access iterator
+- curried:`bind`
+```c++
+double cube(double);
+auto cube2 = bind(cube,2);
+```
+- File streams
+  - stream modes
+    - `ios_base::app`:append
+    - `ios_base::ate`:at the end
+    - `ios_base::binary`:binary mode;beware of system-specific behavior
+    - `ios_base::in`:for reading
+    - `ios_base::out`:for writing
+    - `ios_base::trunc`:truncate the file to 0 length
+- String streams
+  - istringstream
+  - ostringstream
+  - stringstream
+- Stream iterators
+  - 
