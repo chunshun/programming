@@ -1,5 +1,6 @@
 ```python
 # kadane algorithm
+#reference:https://en.wikipedia.org/wiki/Maximum_subarray_problem#Kadane's_algorithm
 def maxSubArray(nums):
      """
      :type nums: List[int]
