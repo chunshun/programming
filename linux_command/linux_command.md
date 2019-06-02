@@ -1,0 +1,3 @@
+- grep or(grep -E "pattern1|pattern2"
+- grep and (grep -E "pattern1.*pattern2"
+- grep not(grep -v "pattern")
