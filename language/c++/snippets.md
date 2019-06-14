@@ -23,3 +23,25 @@ auto i=v.rbegin()[1];
  //refers to the *(v.rbegin()+1)
  
 ```
+- split strings by delimiter
+```c++
+
+vector<string> split(string &s, char delimiter)
+{
+    if (s.empty())
+        return {};
+    vector<string> ans;
+    int i = 0, j = 0;
+    for (; i < s.length(); ++i)
+    {
+        if (s[i++] != delimiter)
+            continue;
+        ans.push_back(s.substr(j, i - j));
+        j = i;
+    }
+    // cout << s.substr(j, i - j) << endl;
+    if (i - j > 0)
+        ans.push_back(s.substr(j, i - j));
+    return ans;
+}
+```
