@@ -48,4 +48,52 @@ if __name__ == '__main__':
 	findPaths(matrix,3,3) 
 	#print(allPaths) 
 ```
-- generate parentheses
+- leetcode131 Palindrome Partitioning
+```c++
+class Solution
+{
+public:
+    vector<vector<string>> result;
+    vector<string> list;
+    vector<vector<string>> partition(string s)
+    {
+        if (s.size() == 0)
+            return result;
+        // 进行回溯搜索
+        search(s, 0);
+        return result;
+    }
+    // 回溯搜索
+    void search(string s, int n)
+    {
+        if (n == s.size())
+        {
+            // 搜索结束
+            result.push_back(list);
+            return;
+        }
+        for (int i = n; i < s.size(); ++i)
+        {
+            string sub = s.substr(n, i - n + 1);
+            if (isPartition(sub))
+            {
+                list.push_back(sub);
+                search(s, i + 1);
+                list.pop_back();
+            }
+        }
+    }
+    bool isPartition(string str)
+    {
+        for (int i = 0, j = str.size() - 1; i <= j; ++i, --j)
+        {
+            if (str.at(i) != str.at(j))
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+};
+
+```
