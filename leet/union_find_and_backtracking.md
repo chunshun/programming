@@ -50,11 +50,18 @@ if __name__ == '__main__':
 ```
 - leetcode131 Palindrome Partitioning
 ```c++
+/* Input: "aab"
+Output:
+[
+  ["aa","b"],
+  ["a","a","b"]
+] */
 class Solution
 {
 public:
     vector<vector<string>> result;
     vector<string> list;
+	
     vector<vector<string>> partition(string s)
     {
         if (s.size() == 0)
