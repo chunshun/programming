@@ -65,3 +65,23 @@ bool isIntersect(Node *h1, Node *h2)
     return h1 == h2;
 }
 ```
+- find the intersected node of two link lists
+Let the longest lists go first(l1-l2),and then go together,the first equal node is the answer.
+```c++
+int l1 = length(h1);
+    int l2 = length(h2);
+    if (l1 < l2)
+        swap(h1, h2);
+
+    int cut = l1 - l2;
+    for (int i = 0; i < cut; ++i)
+    {
+        h1 = h1->next;
+    }
+    while (h1 != h2)
+    {
+        h1 = h1->next;
+        h2 = h2->next;
+    }
+    return h1;
+···
