@@ -50,5 +50,18 @@ def fun(c,g, k):
         ans=max(tmp,ans)
     print(base+ans)
 ```
+- to check if two single link-lists intersected
+Note that the single link list node only has one *next*,which means that the shape must be like *y*,traverse the two lists and check the last two nodes whether is **equal**
+```c++
+bool isIntersect(Node *h1, Node *h2)
+{
+    if (!h1 && !h2)
+        return true;
 
-
+    while (!h1)
+        h1 = h1->next;
+    while (!h2)
+        h2 = h2->next;
+    return h1 == h2;
+}
+```
