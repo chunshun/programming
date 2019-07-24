@@ -179,3 +179,12 @@ val names = List("john", "paul", "george", "ringo")
 hello( names: _* )
 // Hello john and paul and george and ringo    
 ```
+- Option in RDD
+```scala
+// rdd:RDD[Option[Int]]
+rdd.flatMap(l=>l)//=>RDD[Int]
+
+// rdd:RDD[(Int,Option[Int])]
+rdd.flatMapByValues(l=>l) //=>RDD[Int,Int]
+
+```
