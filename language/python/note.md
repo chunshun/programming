@@ -28,3 +28,11 @@ def get_area(i, j):
           + get_area(i, j - 1)
       )
 ```
+- priority_queue
+```python
+from queue import PriorityQueue
+pq=PriorityQueue()
+pq.put((1,2))
+pq.get()
+pq.empty()
+```
