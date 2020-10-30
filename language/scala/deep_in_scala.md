@@ -55,6 +55,7 @@ implicit def intToLoquaciousInt(x: Int) = new LoquaciousInt(x)
 
 
 //rewrite the code
+//implicit class
 implicit class LoquaciousInt(x: Int) {
   def chat: Unit = for(i <- 1 to x) println("Hi!")
 }
@@ -63,4 +64,158 @@ implicit class LoquaciousInt(x: Int) {
 // Hi!
 // Hi!
 // Hi!
+
+implicit class StringImprovements(s: String) {
+     def increment = s.map(c => (c + 1).toChar)
+}
+```
+4. Trait 
+```scala
+//compare:
+
+//without trait:
+final case class Person(firstName: String, lastName: String)
+
+object PersonCanChat {
+  def chat(x: Person) = s"Hi, I'm ${x.firstName}"
+}
+
+PersonCanChat.chat(Person("John", "Smith"))
+
+final case class Dog(name: String)
+
+object DogCanChat {
+  def chat(x: Dog) = s"Woof, my name is ${x.name}"
+}
+
+DogCanChat.chat(Dog("Meg"))
+
+
+
+//with trait
+trait ConCat[A] {
+  def chat(x: A): String
+}
+
+case class Animal(name: String, age: Int)
+object Dog extends ConCat[Animal] {
+  def chat(x: Animal): String = "It's a dog"
+}
+
+
+//merge here
+final case class Person(firstName: String, lastName: String)
+
+object PersonCanChat extends CanChat[Person] {
+  def chat(x: Person) = s"Hi, I'm ${x.firstName}"
+}
+
+final case class Dog(name: String)
+
+object DogCanChat extends CanChat[Dog] {
+  def chat(x: Dog) = s"Woof, my name is ${x.name}"
+}
+
+object ChatUtil {
+  def chat[A](x: A, chattyThing: CanChat[A]) = {
+    chattyThing.chat(x)
+  }
+}
+
+ChatUtil.chat(Dog("Meg"), DogCanChat)
+ChatUtil.chat(Person("John", "Smith"), PersonCanChat)
+```
+4. implicit trait
+```scala
+object ChattyAddons {
+  implicit object PersonCanChat extends CanChat[Person] {
+    def chat(x: Person) = s"Hi, I'm ${x.firstName}"
+  }
+  implicit object DogCanChat extends CanChat[Dog] {
+    def chat(x: Dog) = s"Woof, my name is ${x.name}"
+  }
+}
+
+// ...in another package
+import ChattyAddons._
+
+ChatUtil.chat(Person("John", "Smith"))
+ChatUtil.chat(Dog("Meg"))
+```
+5. plus implicit conversions (in the form of implicit classes)
+```scala
+object ChattyAddons {
+  implicit object PersonCanChat extends CanChat[Person] {
+    def chat(x: Person) = s"Hi, I'm ${x.firstName}"
+  }
+  implicit object DogCanChat extends CanChat[Dog] {
+    def chat(x: Dog) = s"Woof, my name is ${x.name}"
+  }
+  implicit class ChatUtil[A](x: A) {
+    def chat(implicit makesChatty: CanChat[A]) = {
+      makesChatty.chat(x)
+    }
+  }
+}
+
+// in another package...
+
+import ChattyAddons._
+
+Person("John", "Smith").chat
+Dog("Meg").chat
+
+"Hello".chat // this will not work
+```
+6. with case class
+```scala 
+case class StringOps(str: String) {
+  def yell = str.toUpperCase() + "!"
+  def isQuestion = str.endsWith("?")
+}
+
+implicit def stringToStringOps(str: String): StringOps = StringOps(str)
+
+"Hello world".yell // evaluates to "HELLO WORLD!"  string=>StfingOps
+"How are you?".isQuestion // evaluates to 'true'
+
+
+object Helpers {
+  implicit class StringOps(str: String) {
+    def yell = str.toUpperCase() + "!"
+    def isQuestion = str.endsWith("?")
+  }
+}
+
+"Hello world".yell // evaluates to "HELLO WORLD!"
+"How are you?".isQuestion // evaluates to 'true'
+```
+7. Note, that there are requirements for the class to be implicit:
+  1. It has to be inside another trait, class or object
+  2. It has to have exactly one parameter (but it can have multiple implicit parameters on its own)
+  3. There may not be any method, member or object in scope with the same name
+8. Type classes
+```scala
+// Our interface
+trait Monoid[A] {
+  def zero: A
+  def plus(a: A, b: A): A
+}
+
+// Implementation for integers
+implicit object IntegerMonoid extends Monoid[Int] {
+  override def zero: Int = 0
+  override def plus(a: Int, b: Int): Int = a + b
+}
+
+// Implementation for strings
+implicit object StringMonoid extends Monoid[String] {
+  override def zero: String = ""
+  override def plus(a: String, b: String): String = a.concat(b)
+}
+
+// Could be implementation for custom classes, etc..
+
+// Our generic function that knows which implementation to use based on type parameter 'A'
+def sum[A](values: Seq[A])(implicit ev: Monoid[A]): A = values.foldLeft(ev.zero)(ev.plus)
 ```
