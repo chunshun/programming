@@ -219,3 +219,20 @@ implicit object StringMonoid extends Monoid[String] {
 // Our generic function that knows which implementation to use based on type parameter 'A'
 def sum[A](values: Seq[A])(implicit ev: Monoid[A]): A = values.foldLeft(ev.zero)(ev.plus)
 ```
+# `kind`
+1. kind of type
+The kind of ordinary types like `Int` or `String`,whose instances are values is `*`.The kind of unary type constructors like `Maybe` is `*->*`;binary type constructors like `Either` have(curried) kind `*->*->*`.A function is higher-order if it has an order greater than 1, where the order is (informally) the nesting depth, to the left, of function arrows:
+```scala
+Order0: 1::Int
+Order1: Char:Int->Char
+Order2: fix::(a->a)->a,map::(a->b)->[a]->[b]
+Order3: ((A->B)->C)->D
+Order4: (((A->B)->C)->D)->E
+```
+**a higher-kinded type is just a type-level higher-order function which abstracts over type constructors:**
+```scala
+Order0: Int::*
+Order1: Maybe::*->*
+Order2: Funtor::(*->*)->Constraint
+//higher-kinded:converts unary type constraints to typeclass constraints.
+```
