@@ -236,3 +236,49 @@ Order1: Maybe::*->*
 Order2: Funtor::(*->*)->Constraint
 //higher-kinded:converts unary type constraints to typeclass constraints.
 ```
+#Types
+The bottom type - a type which is a subtype of all others, and has no citizen - in Scala is `Nothing`.
+The sealed keyword makes sure that no new subtype of said class can be created outside the current file, and so compiler will always know all types that directly inherit the trait (and form a disjoint union). This allows pattern matching to be exhaustive: compiler can tell us that we didn’t matched all components of the union.
+```scala
+sealed trait Either[+A, +B] {}
+case class Left[+A, +B](a: A) extends Either[A, B]
+case class Right[+A, +B](b: B) extends Either[A, B]
+
+sealed trait Option[+A] {}
+case class Some[A](value: A) extends Option[A]
+case object None extends Option[Nothing]
+
+
+def f(intOrString: Int | String) = intOrString {
+  case i: Int    => ...
+  case s: String => ...
+}
+```
+# algebraic data types
+
+# trait linearization
+```scala
+
+trait Str { def str: String }
+trait Count { def count: Int }
+
+def repeat(cd: Str with Count): String =
+  Iterator.fill(cd.count)(cd.str).mkString
+
+repeat(new Str with Count {
+  val str = "test"
+  val count = 3
+})
+val sc: Str with Count
+val ca: Count with Str
+def repeat(sc) // works as expected
+def repeat(ca) // also works!
+
+
+
+trait A { def value = 10 }
+trait B extends A { override def value = super.value * 2 }
+trait C extends A { override def value = super.value + 2 }
+(new B with C {}).value // (10*2)+2
+(new C with B {}).value // (10+2)*2
+```
