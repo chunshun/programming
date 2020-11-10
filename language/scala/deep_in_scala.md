@@ -1,3 +1,15 @@
+# `tupled` and `curried`
+```scala
+val f1=(x:Int)=>(y:Int)=>x+y
+val f2=(x:Int,y:Int)=>x+y
+
+//f1(19)(10) tupled
+
+
+
+//f2(10,19) curried
+
+```
 # `implicit`
 1. Something missing: implicit parameters
 ```scala
@@ -282,3 +294,14 @@ trait C extends A { override def value = super.value + 2 }
 (new B with C {}).value // (10*2)+2
 (new C with B {}).value // (10+2)*2
 ```
+# Type constructors and parameter types
+We can think of type as a set. But we can also think of function as a set, a set of parameters-returned value pairs. 
+Such interesting function which takes a type and builds another type is called a ***type constructor***. In Scala, we could denote *List* type constructor as `List[_]`.You can have a higher order function: a function which takes and/or returns another function. Same with type constructors: you can have a type constructor, which takes and/or returns another type constructor. Many type class definitions take a type constructor as a parameter:
+```scala
+trait Functor[F[_]] { // <- F is a type constructor
+    def map[A, B](fa: F[A])(f: A => B): F[B]
+}
+```
+# Kinds and higher-kinded-types
+These types of types (a type, a type constructor, etc) are known as kinds."Kind" is a word used to classify types and type constructors
+according to their level of abstractness.
